@@ -14,7 +14,22 @@ function RouteTracker() {
       const url = searchParams?.toString()
         ? `${pathname}?${searchParams.toString()}`
         : pathname;
+
+      // GA4 & Meta Pixel Client Pageview
       pageview(url);
+
+      // Server Telemetry Log for Admin Analytics Dashboard
+      try {
+        fetch("/api/analytics/track", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            path: url,
+            referrer: typeof document !== "undefined" ? document.referrer || "Direct" : "Direct",
+            userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+          }),
+        }).catch(() => {});
+      } catch {}
     }
   }, [pathname, searchParams]);
 

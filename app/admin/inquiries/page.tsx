@@ -24,9 +24,20 @@ import {
   Clock,
   ArrowRight,
   Eye,
-  Plus,
   Zap,
   CheckCircle2,
+  BarChart3,
+  Globe,
+  MapPin,
+  TrendingUp,
+  Users,
+  Smartphone,
+  Laptop,
+  MousePointer,
+  Share2,
+  Send,
+  ExternalLink,
+  ShieldCheck,
 } from "lucide-react";
 
 interface InquiryItem {
@@ -67,6 +78,19 @@ interface OfferConfig {
   expiresAt?: string | null;
 }
 
+const getCountryFlag = (code: string) => {
+  if (!code || code === "UN" || code === "XX") return "🌐";
+  try {
+    const codePoints = code
+      .toUpperCase()
+      .split("")
+      .map((char) => 127397 + char.charCodeAt(0));
+    return String.fromCodePoint(...codePoints);
+  } catch {
+    return "🌐";
+  }
+};
+
 const ADMIN_PIN = process.env.NEXT_PUBLIC_ADMIN_PIN || process.env.ADMIN_PIN || "052005";
 
 export default function RealAdminInquiriesPage() {
@@ -74,8 +98,12 @@ export default function RealAdminInquiriesPage() {
   const [pinInput, setPinInput] = useState<string>("");
   const [pinError, setPinError] = useState<string>("");
 
-  // Admin Section Tab: 'inquiries' | 'offers'
-  const [adminTab, setAdminTab] = useState<"inquiries" | "offers">("inquiries");
+  // Admin Section Tab: 'inquiries' | 'offers' | 'analytics'
+  const [adminTab, setAdminTab] = useState<"inquiries" | "offers" | "analytics">("inquiries");
+
+  // Analytics State
+  const [analyticsData, setAnalyticsData] = useState<any>(null);
+  const [loadingAnalytics, setLoadingAnalytics] = useState<boolean>(false);
 
   // Inquiries State
   const [inquiries, setInquiries] = useState<InquiryItem[]>([]);
@@ -115,6 +143,7 @@ export default function RealAdminInquiriesPage() {
       setIsAuthenticated(true);
       fetchInquiries();
       fetchOffers();
+      fetchAnalytics();
     }
   }, []);
 
@@ -126,8 +155,24 @@ export default function RealAdminInquiriesPage() {
       setPinError("");
       fetchInquiries();
       fetchOffers();
+      fetchAnalytics();
     } else {
       setPinError("Invalid Security PIN. Access denied.");
+    }
+  };
+
+  const fetchAnalytics = async () => {
+    setLoadingAnalytics(true);
+    try {
+      const res = await fetch("/api/admin/analytics");
+      const json = await res.json();
+      if (json.success && json.data) {
+        setAnalyticsData(json.data);
+      }
+    } catch (err) {
+      console.error("Failed to fetch analytics", err);
+    } finally {
+      setLoadingAnalytics(false);
     }
   };
 
@@ -388,8 +433,9 @@ export default function RealAdminInquiriesPage() {
               onClick={() => {
                 fetchInquiries();
                 fetchOffers();
+                fetchAnalytics();
               }}
-              iconRight={<RefreshCw className={`w-3.5 h-3.5 ${loadingInquiries ? "animate-spin" : ""}`} />}
+              iconRight={<RefreshCw className={`w-3.5 h-3.5 ${loadingInquiries || loadingAnalytics ? "animate-spin" : ""}`} />}
             >
               Sync DB
             </Button>
@@ -407,10 +453,10 @@ export default function RealAdminInquiriesPage() {
 
       {/* Main Admin Section Switcher Tabs */}
       <div className="bg-white border-b border-[#E5E7EB]">
-        <Container size="default" className="flex items-center gap-6 text-xs font-bold">
+        <Container size="default" className="flex items-center gap-6 text-xs font-bold overflow-x-auto">
           <button
             onClick={() => setAdminTab("inquiries")}
-            className={`py-3.5 border-b-2 transition-colors flex items-center gap-2 cursor-pointer ${adminTab === "inquiries"
+            className={`py-3.5 border-b-2 transition-colors flex items-center gap-2 cursor-pointer whitespace-nowrap ${adminTab === "inquiries"
               ? "border-[#2563EB] text-[#2563EB]"
               : "border-transparent text-[#5F6368] hover:text-[#111111]"
               }`}
@@ -420,17 +466,31 @@ export default function RealAdminInquiriesPage() {
           </button>
 
           <button
+            onClick={() => {
+              setAdminTab("analytics");
+              fetchAnalytics();
+            }}
+            className={`py-3.5 border-b-2 transition-colors flex items-center gap-2 cursor-pointer whitespace-nowrap ${adminTab === "analytics"
+              ? "border-[#2563EB] text-[#2563EB]"
+              : "border-transparent text-[#5F6368] hover:text-[#111111]"
+              }`}
+          >
+            <BarChart3 className="w-4 h-4 text-[#2563EB]" />
+            <span>Visitor &amp; Location Analytics</span>
+            <span className="bg-emerald-500/10 text-emerald-600 text-[10px] px-2 py-0.5 rounded-full font-mono">
+              LIVE
+            </span>
+          </button>
+
+          <button
             onClick={() => setAdminTab("offers")}
-            className={`py-3.5 border-b-2 transition-colors flex items-center gap-2 cursor-pointer ${adminTab === "offers"
+            className={`py-3.5 border-b-2 transition-colors flex items-center gap-2 cursor-pointer whitespace-nowrap ${adminTab === "offers"
               ? "border-[#2563EB] text-[#2563EB]"
               : "border-transparent text-[#5F6368] hover:text-[#111111]"
               }`}
           >
             <Gift className="w-4 h-4 text-[#2563EB]" />
             <span>Offer &amp; Announcement Manager</span>
-            <span className="bg-[#2563EB]/10 text-[#2563EB] text-[10px] px-2 py-0.5 rounded-full font-mono">
-              NEW
-            </span>
           </button>
         </Container>
       </div>
@@ -735,7 +795,306 @@ export default function RealAdminInquiriesPage() {
           </div>
         )}
 
-        {/* ================= SECTION 2: OFFER & ANNOUNCEMENT MANAGER TAB ================= */}
+        {/* ================= SECTION 2: VISITOR & LOCATION ANALYTICS TAB ================= */}
+        {adminTab === "analytics" && (
+          <div className="space-y-8">
+            {/* Top Stat Cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-2xs">
+                <div className="flex items-center justify-between text-[#5F6368] text-xs font-mono font-bold uppercase mb-2">
+                  <span>TOTAL VISITORS</span>
+                  <Users className="w-4 h-4 text-[#2563EB]" />
+                </div>
+                <div className="text-3xl font-extrabold text-[#111111]">
+                  {loadingAnalytics ? "..." : analyticsData?.totalVisitors || 0}
+                </div>
+                <p className="text-[11px] text-[#5F6368] mt-1">Total page hits tracked</p>
+              </div>
+
+              <div className="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-2xs">
+                <div className="flex items-center justify-between text-[#5F6368] text-xs font-mono font-bold uppercase mb-2">
+                  <span>UNIQUE VISITORS</span>
+                  <Globe className="w-4 h-4 text-[#2563EB]" />
+                </div>
+                <div className="text-3xl font-extrabold text-[#111111]">
+                  {loadingAnalytics ? "..." : analyticsData?.uniqueVisitors || 0}
+                </div>
+                <p className="text-[11px] text-[#5F6368] mt-1">Distinct IP sessions</p>
+              </div>
+
+              <div className="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-2xs">
+                <div className="flex items-center justify-between text-[#5F6368] text-xs font-mono font-bold uppercase mb-2">
+                  <span>INQUIRY CONVERSION RATE</span>
+                  <TrendingUp className="w-4 h-4 text-[#10B981]" />
+                </div>
+                <div className="text-3xl font-extrabold text-[#10B981]">
+                  {loadingAnalytics ? "..." : analyticsData?.conversionRate || "0.0%"}
+                </div>
+                <p className="text-[11px] text-[#5F6368] mt-1">Visitors → Lead Inquiries</p>
+              </div>
+
+              <div className="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-2xs">
+                <div className="flex items-center justify-between text-[#5F6368] text-xs font-mono font-bold uppercase mb-2">
+                  <span>TOTAL PAGEVIEWS</span>
+                  <MousePointer className="w-4 h-4 text-[#2563EB]" />
+                </div>
+                <div className="text-3xl font-extrabold text-[#111111]">
+                  {loadingAnalytics ? "..." : analyticsData?.totalPageviews || 0}
+                </div>
+                <p className="text-[11px] text-[#5F6368] mt-1">Total route interactions</p>
+              </div>
+            </div>
+
+            {/* Middle Grid: Geographic Locations & Traffic Sources */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Left 7 Cols: Countries & Region/State Breakdown */}
+              <div className="lg:col-span-7 bg-white border border-[#E5E7EB] rounded-3xl p-6 sm:p-7 shadow-2xs">
+                <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-4 mb-5">
+                  <div>
+                    <h3 className="text-base font-bold text-[#111111] flex items-center gap-2">
+                      <Globe className="w-4 h-4 text-[#2563EB]" />
+                      Geographic Visitor Distribution (Countries &amp; Regions)
+                    </h3>
+                    <p className="text-xs text-[#5F6368] mt-0.5">
+                      Real-time breakdown of where your traffic and ad audience originates.
+                    </p>
+                  </div>
+                </div>
+
+                {!analyticsData || analyticsData.countryStats?.length === 0 ? (
+                  <div className="p-8 text-center text-xs text-[#5F6368] bg-[#F7F8FA] rounded-2xl border border-[#E5E7EB]">
+                    No location telemetry recorded yet. Live ad traffic will appear here automatically.
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="text-xs font-mono font-bold uppercase text-[#5F6368] mb-2">
+                      TOP VISITING COUNTRIES
+                    </div>
+                    {analyticsData.countryStats.map((item: any) => (
+                      <div key={item.country} className="space-y-1">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-bold text-[#111111] flex items-center gap-2">
+                            <span className="text-base">{getCountryFlag(item.countryCode)}</span>
+                            <span>{item.country}</span>
+                            <span className="text-[10px] font-mono text-gray-400">({item.countryCode})</span>
+                          </span>
+                          <span className="font-mono text-xs font-bold text-[#2563EB]">
+                            {item.count} visitors ({item.percentage}%)
+                          </span>
+                        </div>
+                        {/* Visual Progress Bar */}
+                        <div className="w-full h-2 rounded-full bg-[#F7F8FA] overflow-hidden border border-[#E5E7EB]">
+                          <div
+                            className="h-full bg-gradient-to-r from-[#2563EB] to-[#3B82F6] rounded-full transition-all duration-500"
+                            style={{ width: `${Math.max(parseFloat(item.percentage), 4)}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Regional / State Breakdown */}
+                    {analyticsData.regionStats?.length > 0 && (
+                      <div className="pt-6 border-t border-[#E5E7EB] mt-6">
+                        <div className="text-xs font-mono font-bold uppercase text-[#5F6368] mb-3 flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5 text-[#2563EB]" />
+                          <span>TOP STATES &amp; CITIES</span>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {analyticsData.regionStats.map((reg: any) => (
+                            <div
+                              key={reg.region}
+                              className="p-2.5 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex items-center justify-between text-xs"
+                            >
+                              <span className="font-medium text-[#111111] truncate">{reg.region}</span>
+                              <span className="font-mono font-bold text-[#2563EB] shrink-0 ml-2">
+                                {reg.count} hits
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Right 5 Cols: Ad Traffic Channels & Device Breakdown */}
+              <div className="lg:col-span-5 space-y-6">
+                
+                {/* Traffic Channels */}
+                <div className="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-2xs">
+                  <h3 className="text-base font-bold text-[#111111] mb-4 flex items-center gap-2">
+                    <Share2 className="w-4 h-4 text-[#2563EB]" />
+                    Ad Channels &amp; Traffic Sources
+                  </h3>
+                  {!analyticsData || analyticsData.referrerStats?.length === 0 ? (
+                    <p className="text-xs text-[#5F6368]">No traffic source logs recorded.</p>
+                  ) : (
+                    <div className="space-y-2.5">
+                      {analyticsData.referrerStats.map((ref: any) => (
+                        <div
+                          key={ref.referrer}
+                          className="p-3 rounded-xl border border-[#E5E7EB] bg-[#F7F8FA] flex items-center justify-between text-xs"
+                        >
+                          <span className="font-semibold text-[#111111]">{ref.referrer}</span>
+                          <span className="font-mono font-bold bg-[#2563EB]/10 text-[#2563EB] px-2.5 py-0.5 rounded-full">
+                            {ref.count} sessions
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Device Breakdown */}
+                <div className="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-2xs">
+                  <h3 className="text-base font-bold text-[#111111] mb-4 flex items-center gap-2">
+                    <Smartphone className="w-4 h-4 text-[#2563EB]" />
+                    Device Types &amp; Browsers
+                  </h3>
+                  <div className="grid grid-cols-3 gap-2 text-center">
+                    {analyticsData?.deviceStats?.map((dev: any) => (
+                      <div key={dev.device} className="p-3 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB]">
+                        {dev.device === "Mobile" ? (
+                          <Smartphone className="w-4 h-4 mx-auto text-[#2563EB] mb-1" />
+                        ) : (
+                          <Laptop className="w-4 h-4 mx-auto text-[#2563EB] mb-1" />
+                        )}
+                        <span className="text-xs font-bold text-[#111111] block">{dev.device}</span>
+                        <span className="text-[10px] font-mono text-[#5F6368]">{dev.percentage}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Lead Conversion Action Center */}
+                <div className="bg-[#0F172A] text-white rounded-3xl p-6 shadow-md border border-[#1E293B]">
+                  <div className="flex items-center gap-2 text-[#38BDF8] text-xs font-mono font-bold uppercase mb-2">
+                    <Zap className="w-4 h-4" />
+                    <span>CLIENT CONVERSION POWER TOOLS</span>
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">
+                    Convert Visitors to Paying Clients
+                  </h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                    Send instant WhatsApp scope proposals and email quotes to qualified lead inquiries.
+                  </p>
+
+                  <div className="space-y-2">
+                    {inquiries.slice(0, 3).map((lead) => (
+                      <div
+                        key={lead.ticketId}
+                        className="bg-[#1E293B] border border-slate-700/70 p-3 rounded-xl flex items-center justify-between text-xs"
+                      >
+                        <div className="truncate">
+                          <strong className="text-white block truncate">{lead.client.name}</strong>
+                          <span className="text-[10px] text-slate-400 block truncate">
+                            {lead.project.type} ({lead.project.budget})
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1 shrink-0 ml-2">
+                          {lead.client.phone && lead.client.phone !== "N/A" && (
+                            <a
+                              href={`https://wa.me/${lead.client.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
+                                `Hi ${lead.client.name}, thank you for inquiring with VS Business Solutions about your ${lead.project.type} project. We reviewed your scope and would love to share a proposal!`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-1.5 rounded-lg bg-[#10B981] text-white hover:bg-[#059669] transition-colors"
+                              title="Send WhatsApp Proposal"
+                            >
+                              <MessageSquare className="w-3.5 h-3.5" />
+                            </a>
+                          )}
+                          <a
+                            href={`mailto:${lead.client.email}?subject=${encodeURIComponent(
+                              `VS Business Solutions - Proposal for ${lead.project.type}`
+                            )}&body=${encodeURIComponent(
+                              `Hi ${lead.client.name},\n\nThank you for reaching out regarding your project: ${lead.project.type}.\n\n`
+                            )}`}
+                            className="p-1.5 rounded-lg bg-[#2563EB] text-white hover:bg-[#1d4ed8] transition-colors"
+                            title="Send Email Scope Proposal"
+                          >
+                            <Mail className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Bottom Section: Live Telemetry Session Logs Table */}
+            <div className="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-2xs">
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E5E7EB]">
+                <div>
+                  <h3 className="text-base font-bold text-[#111111]">
+                    Live Visitor Telemetry &amp; Session Logs
+                  </h3>
+                  <p className="text-xs text-[#5F6368]">
+                    Real-time feed of incoming visitors, IP locations, device types, and page routes.
+                  </p>
+                </div>
+                <span className="text-xs font-mono font-bold bg-[#F7F8FA] border border-[#E5E7EB] px-3 py-1 rounded-full text-[#5F6368]">
+                  Showing Latest 50 Logs
+                </span>
+              </div>
+
+              {!analyticsData || !analyticsData.recentLogs || analyticsData.recentLogs.length === 0 ? (
+                <div className="p-8 text-center text-xs text-[#5F6368] bg-[#F7F8FA] rounded-2xl">
+                  No live visitor telemetry logged yet. As users visit your site or ads click through, live sessions will appear here.
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs border-collapse">
+                    <thead>
+                      <tr className="border-b border-[#E5E7EB] bg-[#F7F8FA] text-[#5F6368] font-mono text-[11px]">
+                        <th className="p-3">TIME</th>
+                        <th className="p-3">LOCATION</th>
+                        <th className="p-3">IP ADDRESS</th>
+                        <th className="p-3">PAGE ROUTE</th>
+                        <th className="p-3">TRAFFIC SOURCE</th>
+                        <th className="p-3">DEVICE / BROWSER</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#E5E7EB]">
+                      {analyticsData.recentLogs.map((log: any, idx: number) => (
+                        <tr key={idx} className="hover:bg-[#F7F8FA]/70 transition-colors">
+                          <td className="p-3 font-mono text-[#5F6368] whitespace-nowrap">
+                            {new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </td>
+                          <td className="p-3 font-bold text-[#111111] whitespace-nowrap">
+                            <span className="mr-1.5">{getCountryFlag(log.countryCode)}</span>
+                            <span>{log.city && log.city !== "Unknown" ? `${log.city}, ` : ""}{log.country}</span>
+                          </td>
+                          <td className="p-3 font-mono text-gray-500 whitespace-nowrap">
+                            {log.ip}
+                          </td>
+                          <td className="p-3 font-mono font-bold text-[#2563EB] whitespace-nowrap">
+                            {log.path}
+                          </td>
+                          <td className="p-3 font-medium text-slate-700 whitespace-nowrap">
+                            <span className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-[10px]">
+                              {log.referrer}
+                            </span>
+                          </td>
+                          <td className="p-3 text-[#5F6368] whitespace-nowrap">
+                            {log.device} · {log.browser}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ================= SECTION 3: OFFER & ANNOUNCEMENT MANAGER TAB ================= */}
         {adminTab === "offers" && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left 7 Cols: Configure Form */}
