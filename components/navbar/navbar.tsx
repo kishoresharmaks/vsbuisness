@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MobileMenu } from "@/components/navbar/mobile-menu";
-import { ArrowRight, Sparkles, PhoneCall } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -63,7 +63,7 @@ export function Navbar() {
         {/* Subtle Glowing Top Ambient Shimmer Line */}
         <div className="absolute top-0 left-1/4 right-1/4 h-[1.5px] bg-gradient-to-r from-transparent via-[#2563EB] to-transparent opacity-80" />
 
-        {/* Brand Logo & Live Status Indicator */}
+        {/* Brand Logo */}
         <Link href="/" className="group flex items-center gap-2.5 sm:gap-3 z-10">
           <div className="relative flex items-center justify-center">
             <div className="absolute inset-0 rounded-xl bg-[#2563EB]/20 blur-md group-hover:bg-[#2563EB]/40 transition-all duration-300" />
@@ -83,17 +83,12 @@ export function Navbar() {
             </span>
           </div>
 
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <span className="font-black text-sm sm:text-base text-slate-900 tracking-tight group-hover:text-[#2563EB] transition-colors">
-                VS BUSINESS
-              </span>
-              <span className="hidden sm:inline-flex items-center px-2 py-0.5 text-[9px] font-mono font-extrabold uppercase tracking-widest rounded-full bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]">
-                SOLUTIONS
-              </span>
-            </div>
-            <span className="text-[10px] font-semibold text-slate-400 group-hover:text-slate-600 transition-colors flex items-center gap-1">
-              <span className="w-1 h-1 rounded-full bg-emerald-500"></span> Available for hire
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <span className="font-black text-sm sm:text-base text-slate-900 tracking-tight group-hover:text-[#2563EB] transition-colors">
+              VS BUSINESS
+            </span>
+            <span className="hidden sm:inline-flex items-center px-2 py-0.5 text-[9px] font-mono font-extrabold uppercase tracking-widest rounded-full bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]">
+              SOLUTIONS
             </span>
           </div>
         </Link>
@@ -147,17 +142,8 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Desktop Right Action CTA Button & Call Shortcut */}
+        {/* Desktop Right Action CTA Button */}
         <div className="hidden md:flex items-center gap-3 z-10">
-          <a
-            href="tel:+917695946750"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 hover:text-[#2563EB] hover:bg-blue-50/80 border border-transparent hover:border-blue-100 transition-all duration-200"
-            title="Call Us Directly"
-          >
-            <PhoneCall className="w-3.5 h-3.5 text-[#2563EB]" />
-            <span>+91 7695946750</span>
-          </a>
-
           <a href="#contact">
             <Button
               variant="primary"
@@ -167,7 +153,6 @@ export function Navbar() {
             >
               {/* Shimmer Sweep Overlay */}
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:animate-shimmer" />
-              <Sparkles className="w-3.5 h-3.5 mr-1 animate-pulse text-blue-200" />
               <span>Start Project</span>
             </Button>
           </a>
