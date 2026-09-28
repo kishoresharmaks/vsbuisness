@@ -32,7 +32,11 @@ export const metadata: Metadata = {
   creator: "VS Business Solutions",
   metadataBase: new URL("https://buisness.beeshubfarmland.com"),
   icons: {
-    icon: "/Brand_Logo.png",
+    icon: [
+      { url: "/Brand_Logo.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/Brand_Logo.png",
     apple: "/Brand_Logo.png",
   },
   openGraph: {
@@ -92,6 +96,7 @@ export default function RootLayout({
     >
       <head>
         <link rel="icon" href="/Brand_Logo.png" type="image/png" sizes="any" />
+        <link rel="shortcut icon" href="/Brand_Logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/Brand_Logo.png" />
         <script
           type="application/ld+json"
