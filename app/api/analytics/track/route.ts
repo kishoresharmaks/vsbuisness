@@ -29,15 +29,22 @@ function parseUserAgent(ua: string) {
   return { device, browser };
 }
 
-function cleanReferrer(ref: string) {
-  if (!ref || ref === "direct") return "Direct";
-  if (ref.includes("google")) return "Google Search / Ads";
-  if (ref.includes("facebook") || ref.includes("fb")) return "Meta / Facebook Ads";
-  if (ref.includes("instagram")) return "Instagram Ads";
-  if (ref.includes("linkedin")) return "LinkedIn";
-  if (ref.includes("whatsapp")) return "WhatsApp";
-  if (ref.includes("twitter") || ref.includes("t.co") || ref.includes("x.com")) return "X (Twitter)";
-  return "External Website";
+function cleanReferrer(ref: string, host: string = "") {
+  if (!ref || ref === "direct" || ref === "Direct") return "Direct Traffic";
+  const lowerRef = ref.toLowerCase();
+  const lowerHost = host ? host.toLowerCase() : "";
+
+  if (lowerHost && lowerRef.includes(lowerHost)) return "Internal Navigation";
+  if (lowerRef.includes("localhost") || lowerRef.includes("127.0.0.1")) return "Internal Navigation";
+  if (lowerRef.includes("google")) return "Google Search / Ads";
+  if (lowerRef.includes("facebook") || lowerRef.includes("fb")) return "Meta / Facebook Ads";
+  if (lowerRef.includes("instagram")) return "Instagram Ads";
+  if (lowerRef.includes("linkedin")) return "LinkedIn";
+  if (lowerRef.includes("whatsapp")) return "WhatsApp";
+  if (lowerRef.includes("twitter") || lowerRef.includes("t.co") || lowerRef.includes("x.com")) return "X (Twitter)";
+  if (lowerRef.includes("youtube")) return "YouTube";
+
+  return "External Referral";
 }
 
 export async function POST(req: NextRequest) {
@@ -87,7 +94,8 @@ export async function POST(req: NextRequest) {
     }
 
     const { device, browser } = parseUserAgent(reqUa || req.headers.get("user-agent") || "");
-    const referrer = cleanReferrer(reqRef);
+    const hostHeader = req.headers.get("host") || "";
+    const referrer = cleanReferrer(reqRef, hostHeader);
 
     const logEntry = {
       timestamp: new Date(),

@@ -168,13 +168,29 @@ export async function GET(req: NextRequest) {
     // Referrer Breakdown
     const referrerMap: Record<string, number> = {};
     logs.forEach((log) => {
-      const ref = log.referrer || "Direct";
+      const ref = log.referrer || "Direct Traffic";
       referrerMap[ref] = (referrerMap[ref] || 0) + 1;
     });
 
     const referrerStats = Object.keys(referrerMap)
       .map((ref) => ({ referrer: ref, count: referrerMap[ref] }))
       .sort((a, b) => b.count - a.count);
+
+    // Top Pages / Routes Breakdown
+    const pageMap: Record<string, number> = {};
+    logs.forEach((log) => {
+      const p = log.path || "/";
+      pageMap[p] = (pageMap[p] || 0) + 1;
+    });
+
+    const topPagesStats = Object.keys(pageMap)
+      .map((pathStr) => ({
+        path: pathStr,
+        count: pageMap[pathStr],
+        percentage: totalVisitors > 0 ? ((pageMap[pathStr] / totalVisitors) * 100).toFixed(1) : "0",
+      }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
 
     return NextResponse.json({
       success: true,
@@ -191,7 +207,8 @@ export async function GET(req: NextRequest) {
         regionStats,
         deviceStats,
         referrerStats,
-        recentLogs: logs.slice(0, 100),
+        topPagesStats,
+        recentLogs: logs,
       },
     });
   } catch (error: any) {

@@ -38,6 +38,10 @@ import {
   Send,
   ExternalLink,
   ShieldCheck,
+  ChevronLeft,
+  ChevronRight,
+  Link2,
+  Layers,
 } from "lucide-react";
 
 interface InquiryItem {
@@ -107,6 +111,7 @@ export default function RealAdminInquiriesPage() {
   const [analyticsTimeframe, setAnalyticsTimeframe] = useState<"all" | "today" | "yesterday" | "7days" | "30days" | "custom">("all");
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
+  const [logsPage, setLogsPage] = useState<number>(1);
 
   // Inquiries State
   const [inquiries, setInquiries] = useState<InquiryItem[]>([]);
@@ -1063,6 +1068,38 @@ export default function RealAdminInquiriesPage() {
                   )}
                 </div>
 
+                {/* Top Visited Pages & Routes */}
+                <div className="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-2xs">
+                  <h3 className="text-base font-bold text-[#111111] mb-4 flex items-center gap-2">
+                    <Link2 className="w-4 h-4 text-[#2563EB]" />
+                    Top Visited Pages &amp; Routes
+                  </h3>
+                  {!analyticsData || !analyticsData.topPagesStats || analyticsData.topPagesStats.length === 0 ? (
+                    <p className="text-xs text-[#5F6368]">No route telemetry logged yet.</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {analyticsData.topPagesStats.map((item: any) => (
+                        <div key={item.path} className="space-y-1">
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="font-mono font-bold text-[#2563EB] truncate max-w-[220px]">
+                              {item.path}
+                            </span>
+                            <span className="font-mono text-[11px] font-bold text-[#111111]">
+                              {item.count} views ({item.percentage}%)
+                            </span>
+                          </div>
+                          <div className="w-full h-1.5 rounded-full bg-[#F7F8FA] overflow-hidden border border-[#E5E7EB]">
+                            <div
+                              className="h-full bg-gradient-to-r from-[#2563EB] to-[#3B82F6] rounded-full transition-all duration-500"
+                              style={{ width: `${Math.max(parseFloat(item.percentage), 5)}%` }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 {/* Device Breakdown */}
                 <div className="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-2xs">
                   <h3 className="text-base font-bold text-[#111111] mb-4 flex items-center gap-2">
@@ -1144,19 +1181,22 @@ export default function RealAdminInquiriesPage() {
             </div>
 
             {/* Bottom Section: Live Telemetry Session Logs Table */}
-            <div className="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-2xs">
-              <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E5E7EB]">
+            <div className="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-2xs space-y-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-[#E5E7EB]">
                 <div>
                   <h3 className="text-base font-bold text-[#111111]">
                     Live Visitor Telemetry &amp; Session Logs
                   </h3>
                   <p className="text-xs text-[#5F6368]">
-                    Real-time feed of incoming visitors, IP locations, device types, and page routes.
+                    Real-time feed of incoming visitors, IP locations, device types, traffic sources, and page routes.
                   </p>
                 </div>
-                <span className="text-xs font-mono font-bold bg-[#F7F8FA] border border-[#E5E7EB] px-3 py-1 rounded-full text-[#5F6368]">
-                  Showing Latest 50 Logs
-                </span>
+                
+                {analyticsData?.recentLogs && analyticsData.recentLogs.length > 0 && (
+                  <span className="text-xs font-mono font-bold bg-[#F7F8FA] border border-[#E5E7EB] px-3 py-1 rounded-full text-[#5F6368]">
+                    Showing {(logsPage - 1) * 10 + 1} - {Math.min(logsPage * 10, analyticsData.recentLogs.length)} of {analyticsData.recentLogs.length} Logs
+                  </span>
+                )}
               </div>
 
               {!analyticsData || !analyticsData.recentLogs || analyticsData.recentLogs.length === 0 ? (
@@ -1164,47 +1204,100 @@ export default function RealAdminInquiriesPage() {
                   No live visitor telemetry logged yet. As users visit your site or ads click through, live sessions will appear here.
                 </div>
               ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs border-collapse">
-                    <thead>
-                      <tr className="border-b border-[#E5E7EB] bg-[#F7F8FA] text-[#5F6368] font-mono text-[11px]">
-                        <th className="p-3">TIME</th>
-                        <th className="p-3">LOCATION</th>
-                        <th className="p-3">IP ADDRESS</th>
-                        <th className="p-3">PAGE ROUTE</th>
-                        <th className="p-3">TRAFFIC SOURCE</th>
-                        <th className="p-3">DEVICE / BROWSER</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-[#E5E7EB]">
-                      {analyticsData.recentLogs.map((log: any, idx: number) => (
-                        <tr key={idx} className="hover:bg-[#F7F8FA]/70 transition-colors">
-                          <td className="p-3 font-mono text-[#5F6368] whitespace-nowrap">
-                            {new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                          </td>
-                          <td className="p-3 font-bold text-[#111111] whitespace-nowrap">
-                            <span className="mr-1.5">{getCountryFlag(log.countryCode)}</span>
-                            <span>{log.city && log.city !== "Unknown" ? `${log.city}, ` : ""}{log.country}</span>
-                          </td>
-                          <td className="p-3 font-mono text-gray-500 whitespace-nowrap">
-                            {log.ip}
-                          </td>
-                          <td className="p-3 font-mono font-bold text-[#2563EB] whitespace-nowrap">
-                            {log.path}
-                          </td>
-                          <td className="p-3 font-medium text-slate-700 whitespace-nowrap">
-                            <span className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-[10px]">
-                              {log.referrer}
-                            </span>
-                          </td>
-                          <td className="p-3 text-[#5F6368] whitespace-nowrap">
-                            {log.device} · {log.browser}
-                          </td>
+                <>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs border-collapse">
+                      <thead>
+                        <tr className="border-b border-[#E5E7EB] bg-[#F7F8FA] text-[#5F6368] font-mono text-[11px]">
+                          <th className="p-3">TIME</th>
+                          <th className="p-3">LOCATION</th>
+                          <th className="p-3">IP ADDRESS</th>
+                          <th className="p-3">PAGE ROUTE</th>
+                          <th className="p-3">TRAFFIC SOURCE</th>
+                          <th className="p-3">DEVICE / BROWSER</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                      </thead>
+                      <tbody className="divide-y divide-[#E5E7EB]">
+                        {analyticsData.recentLogs
+                          .slice((logsPage - 1) * 10, logsPage * 10)
+                          .map((log: any, idx: number) => (
+                            <tr key={idx} className="hover:bg-[#F7F8FA]/70 transition-colors">
+                              <td className="p-3 font-mono text-[#5F6368] whitespace-nowrap">
+                                {new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                              </td>
+                              <td className="p-3 font-bold text-[#111111] whitespace-nowrap">
+                                <span className="mr-1.5">{getCountryFlag(log.countryCode)}</span>
+                                <span>{log.city && log.city !== "Unknown" ? `${log.city}, ` : ""}{log.country}</span>
+                              </td>
+                              <td className="p-3 font-mono text-gray-500 whitespace-nowrap">
+                                {log.ip}
+                              </td>
+                              <td className="p-3 font-mono font-bold text-[#2563EB] whitespace-nowrap">
+                                {log.path}
+                              </td>
+                              <td className="p-3 font-medium text-slate-700 whitespace-nowrap">
+                                <span className={`px-2.5 py-0.5 rounded-full border text-[10px] font-bold ${
+                                  log.referrer === "Internal Navigation"
+                                    ? "bg-blue-50 text-[#2563EB] border-blue-200"
+                                    : log.referrer === "Direct Traffic"
+                                    ? "bg-slate-100 text-slate-700 border-slate-200"
+                                    : "bg-emerald-50 text-emerald-700 border-emerald-200"
+                                }`}>
+                                  {log.referrer}
+                                </span>
+                              </td>
+                              <td className="p-3 text-[#5F6368] whitespace-nowrap">
+                                {log.device} · {log.browser}
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Pagination Controls */}
+                  {Math.ceil(analyticsData.recentLogs.length / 10) > 1 && (
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-[#E5E7EB]">
+                      <div className="text-xs font-mono text-[#5F6368]">
+                        Page <strong>{logsPage}</strong> of <strong>{Math.ceil(analyticsData.recentLogs.length / 10)}</strong>
+                      </div>
+
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          onClick={() => setLogsPage((p) => Math.max(p - 1, 1))}
+                          disabled={logsPage === 1}
+                          className="p-2 rounded-xl border border-[#E5E7EB] bg-[#F7F8FA] hover:bg-white text-xs font-bold disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-colors"
+                          title="Previous Page"
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                        </button>
+
+                        {Array.from({ length: Math.ceil(analyticsData.recentLogs.length / 10) }, (_, i) => i + 1).map((pg) => (
+                          <button
+                            key={pg}
+                            onClick={() => setLogsPage(pg)}
+                            className={`w-8 h-8 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                              logsPage === pg
+                                ? "bg-[#2563EB] text-white shadow-2xs"
+                                : "bg-[#F7F8FA] text-[#5F6368] border border-[#E5E7EB] hover:bg-white"
+                            }`}
+                          >
+                            {pg}
+                          </button>
+                        ))}
+
+                        <button
+                          onClick={() => setLogsPage((p) => Math.min(p + 1, Math.ceil(analyticsData.recentLogs.length / 10)))}
+                          disabled={logsPage >= Math.ceil(analyticsData.recentLogs.length / 10)}
+                          className="p-2 rounded-xl border border-[#E5E7EB] bg-[#F7F8FA] hover:bg-white text-xs font-bold disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-colors"
+                          title="Next Page"
+                        >
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
