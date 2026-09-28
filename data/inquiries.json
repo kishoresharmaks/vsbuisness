@@ -1,0 +1,155 @@
+[
+  {
+    "ticketId": "VS-2026-5300",
+    "createdAt": "2026-09-28T05:09:12.804Z",
+    "status": "New",
+    "adminNotes": "",
+    "client": {
+      "name": "Koshore",
+      "email": "k@m.c",
+      "company": "N/A",
+      "phone": "N/A"
+    },
+    "project": {
+      "type": "Website",
+      "scope": "Design Only",
+      "budget": "₹2,00,000",
+      "timeline": "ASAP (1-2 Weeks)",
+      "features": [
+        "responsive"
+      ],
+      "customFeatureText": "",
+      "description": "admin/inquiriesadmin/inquiriesadmin/inquiriesadmin/inquiries"
+    }
+  },
+  {
+    "ticketId": "VS-2026-9868",
+    "createdAt": "2026-09-28T05:18:16.742Z",
+    "status": "In Contact",
+    "adminNotes": "Noted",
+    "client": {
+      "name": "Kishore",
+      "email": "krishkishore@gmail.com",
+      "company": "N/A",
+      "phone": "+917695946750"
+    },
+    "project": {
+      "type": "E-commerce",
+      "scope": "Speed & Optimization",
+      "budget": "₹Flexible / Open to discuss",
+      "timeline": "Standard (2-4 Weeks)",
+      "features": [
+        "responsive",
+        "seo",
+        "payments",
+        "cms",
+        "speed",
+        "whatsapp"
+      ],
+      "customFeatureText": "",
+      "description": "Hey I need to build Online Store.."
+    }
+  },
+  {
+    "ticketId": "VS-2026-9012",
+    "createdAt": "2026-09-28T06:07:33.651Z",
+    "status": "New",
+    "adminNotes": "",
+    "couponCode": "",
+    "client": {
+      "name": "Kishoresharma",
+      "email": "krishkishoreks@gmail.com",
+      "company": "CTS",
+      "phone": "7894561205"
+    },
+    "project": {
+      "type": "Website",
+      "scope": "Full Product",
+      "budget": "₹2,00,000",
+      "timeline": "Standard (2-4 Weeks)",
+      "features": [
+        "responsive",
+        "seo",
+        "speed"
+      ],
+      "customFeatureText": "",
+      "description": "Hello I need to build google clone"
+    }
+  },
+  {
+    "ticketId": "VS-2026-2552",
+    "createdAt": "2026-09-28T06:16:11.602Z",
+    "status": "New",
+    "adminNotes": "",
+    "couponCode": "SAVE15",
+    "client": {
+      "name": "/var/www/html",
+      "email": "/var/www/html@gmail.com",
+      "company": "N/A",
+      "phone": "N/A"
+    },
+    "project": {
+      "type": "Website",
+      "scope": "Full Product",
+      "budget": "₹5,00,000",
+      "timeline": "Standard (2-4 Weeks)",
+      "features": [
+        "responsive",
+        "seo",
+        "speed"
+      ],
+      "customFeatureText": "",
+      "description": "/var/www/html /var/www/html /var/www/html /var/www/html /var/www/html /var/www/html /var/www/html /var/www/html /var/www/html"
+    }
+  },
+  {
+    "ticketId": "VS-2026-9133",
+    "createdAt": "2026-09-28T06:21:36.222Z",
+    "status": "New",
+    "adminNotes": "",
+    "couponCode": "SAVE15",
+    "client": {
+      "name": "Coupon Test",
+      "email": "coupon@test.com",
+      "company": "N/A",
+      "phone": "N/A"
+    },
+    "project": {
+      "type": "Website",
+      "scope": "Full Product",
+      "budget": "₹2,00,000",
+      "timeline": "Standard",
+      "features": [
+        "responsive"
+      ],
+      "customFeatureText": "",
+      "description": "Testing coupon code storage"
+    }
+  },
+  {
+    "ticketId": "VS-2026-5586",
+    "createdAt": "2026-09-28T06:24:30.516Z",
+    "status": "New",
+    "adminNotes": "",
+    "couponCode": "SAVE150",
+    "client": {
+      "name": "k",
+      "email": "k@dfm.l",
+      "company": "N/A",
+      "phone": "N/A"
+    },
+    "project": {
+      "type": "Website",
+      "scope": "Full Product",
+      "budget": "₹2,00,000",
+      "timeline": "Standard (2-4 Weeks)",
+      "features": [
+        "responsive",
+        "seo",
+        "speed"
+      ],
+      "customFeatureText": "",
+      "description": "ggggggggv ggggggggv  ggggggggv ggggggggv  ggggggggv ggggggggv  ggggggggv ggggggggv  ggggggggv ggggggggv  ggggggggv ggggggggv  ggggggggv ggggggggv  ggggggggv ggggggggv  ggggggggv ggggggggv  ggggggggv ggggggggv  ggggggggv ggggggggv"
+    }
+  }
+]

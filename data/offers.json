@@ -1,0 +1,58 @@
+[
+  {
+    "id": "offer-1790574323849",
+    "title": "Special Festival Season Offer",
+    "message": "Get 15% off on custom Next.js Web Development & E-Commerce platforms!",
+    "discountTag": "SAVE15",
+    "badgeText": "LIMITED PERIOD OFFER",
+    "ctaText": "Claim 15% Discount →",
+    "ctaLink": "/start-project",
+    "theme": "emerald",
+    "position": "top-bar",
+    "isActive": true,
+    "expiresAt": "2026-12-31T07:29:00.000Z",
+    "createdAt": "2026-09-28T05:45:23.746Z"
+  },
+  {
+    "id": "offer-1790574289701",
+    "title": "Special Festival Season Offer",
+    "message": "Get 15% off on custom Next.js Web Development & E-Commerce platforms!",
+    "discountTag": "SAVE15",
+    "badgeText": "LIMITED PERIOD OFFER",
+    "ctaText": "Claim 15% Discount →",
+    "ctaLink": "/start-project",
+    "theme": "amber",
+    "position": "floating-toast",
+    "isActive": false,
+    "expiresAt": "2026-12-31T12:59:00.000Z",
+    "createdAt": "2026-09-28T05:44:49.655Z"
+  },
+  {
+    "id": "offer-1790574266717",
+    "title": "Special Festival Season Offer",
+    "message": "Get 15% off on custom Next.js Web Development & E-Commerce platforms!",
+    "discountTag": "SAVE15",
+    "badgeText": "LIMITED PERIOD OFFER",
+    "ctaText": "Claim 15% Discount →",
+    "ctaLink": "/start-project",
+    "theme": "amber",
+    "position": "top-bar",
+    "isActive": false,
+    "expiresAt": "2026-12-31T18:29:00.000Z",
+    "createdAt": "2026-09-28T05:44:26.550Z"
+  },
+  {
+    "id": "offer-default-1",
+    "title": "Special Festival Season Offer",
+    "message": "Get 15% off on custom Next.js Web Development & E-Commerce platforms!",
+    "discountTag": "SAVE15",
+    "badgeText": "LIMITED PERIOD OFFER",
+    "ctaText": "Claim 15% Discount →",
+    "ctaLink": "/start-project",
+    "theme": "blue",
+    "position": "floating-toast",
+    "isActive": false,
+    "expiresAt": "2026-12-31T23:59:59.000Z",
+    "createdAt": "2026-09-28T11:00:00.000Z"
+  }
+]
