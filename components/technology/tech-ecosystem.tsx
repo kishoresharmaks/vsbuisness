@@ -44,15 +44,9 @@ export function TechEcosystem() {
       highlighted: true,
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-black flex items-center justify-center text-white shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <mask id="mask_next" maskUnits="userSpaceOnUse" x="0" y="0" width="180" height="180">
-              <circle cx="90" cy="90" r="90" fill="black" />
-            </mask>
-            <g mask="url(#mask_next)">
-              <circle cx="90" cy="90" r="90" fill="black" />
-              <path d="M149.508 157.52L69.143 54H54V125.97H66.8136V69.215L138.864 162.616C142.619 161.087 146.184 159.38 149.508 157.52Z" fill="white" />
-              <path d="M115 54H127.814V126H115V54Z" fill="white" />
-            </g>
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 128 128" fill="none">
+            <circle cx="64" cy="64" r="64" fill="black" />
+            <path d="M100 100L48 36H36v56h12V52l42 50h10V36h-12v64z" fill="white" />
           </svg>
         </div>
       ),
@@ -66,11 +60,11 @@ export function TechEcosystem() {
       highlighted: true,
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#082F49] flex items-center justify-center border border-[#0284C7]/30 text-[#38BDF8] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="50" cy="50" rx="42" ry="16" stroke="#38BDF8" strokeWidth="4.5" transform="rotate(0 50 50)" />
-            <ellipse cx="50" cy="50" rx="42" ry="16" stroke="#38BDF8" strokeWidth="4.5" transform="rotate(60 50 50)" />
-            <ellipse cx="50" cy="50" rx="42" ry="16" stroke="#38BDF8" strokeWidth="4.5" transform="rotate(120 50 50)" />
-            <circle cx="50" cy="50" r="7.5" fill="#38BDF8" />
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none" stroke="#38BDF8" strokeWidth="5">
+            <ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(0 50 50)" />
+            <ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(60 50 50)" />
+            <ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(120 50 50)" />
+            <circle cx="50" cy="50" r="7" fill="#38BDF8" stroke="none" />
           </svg>
         </div>
       ),
@@ -82,11 +76,8 @@ export function TechEcosystem() {
       category: "Frontend & Speed",
       metric: "Bank-Grade Reliability",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#3178C6] flex items-center justify-center text-white shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" rx="16" fill="#3178C6" />
-            <path d="M22 35h32v8H42v32h-8V43H22v-8zm34 26c0-6 5-10 12-10 6 0 11 3 11 8 0 4-3 7-8 8l-4 1c-3 1-4 2-4 4 0 2 2 3 5 3 4 0 7-2 8-5l6 4c-3 5-8 7-14 7-8 0-13-4-13-10 0-4 3-7 8-9l4-1c3-1 4-2 4-4 0-2-2-3-4-3-3 0-5 1-6 4l-6-4z" fill="white" />
-          </svg>
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#3178C6] flex items-center justify-center text-white font-mono font-black text-sm sm:text-base tracking-tighter shadow-xs shrink-0">
+          TS
         </div>
       ),
     },
@@ -97,9 +88,9 @@ export function TechEcosystem() {
       category: "Frontend & Speed",
       metric: "100% Mobile Responsive",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0F172A] flex items-center justify-center border border-[#06B6D4]/30 text-[#06B6D4] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="#06B6D4" xmlns="http://www.w3.org/2000/svg">
-            <path d="M26 38c5-10 13-14 24-12 7 1 12 6 15 11 4 7 8 10 17 9 7-1 12-6 15-16-5 10-13 14-24 12-7-1-12-6-15-11-4-7-8-10-17-9-7 1-12 6-15 16zm-12 26c5-10 13-14 24-12 7 1 12 6 15 11 4 7 8 10 17 9 7-1 12-6 15-16-5 10-13 14-24 12-7-1-12-6-15-11-4-7-8-10-17-9-7 1-12 6-15 16z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0F172A] flex items-center justify-center border border-[#06B6D4]/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#06B6D4">
+            <path d="M12 6c-3.3 0-5.5 1.7-6.6 5 1.1-1.7 2.5-2.2 4.1-1.7 1 .3 1.7 1 2.5 1.8C13.2 12.3 14.8 14 18.6 14c3.3 0 5.5-1.7 6.6-5-1.1 1.7-2.5 2.2-4.1 1.7-1-.3-1.7-1-2.5-1.8C17.4 7.7 15.8 6 12 6zM5.4 14c-3.3 0-5.5 1.7-6.6 5 1.1-1.7 2.5-2.2 4.1-1.7 1 .3 1.7 1 2.5 1.8C6.6 20.3 8.2 22 12 22c3.3 0 5.5-1.7 6.6-5-1.1 1.7-2.5 2.2-4.1 1.7-1-.3-1.7-1-2.5-1.8C10.8 15.7 9.2 14 5.4 14z" />
           </svg>
         </div>
       ),
@@ -112,7 +103,7 @@ export function TechEcosystem() {
       metric: "Pixel-Perfect UX",
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#1E1B4B] flex items-center justify-center border border-purple-500/30 shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 38 57" fill="none">
             <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38H19V28.5Z" fill="#1ABCFE" />
             <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83" />
             <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262" />
@@ -132,10 +123,9 @@ export function TechEcosystem() {
       metric: "<10ms Server Response",
       highlighted: true,
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#022C22] flex items-center justify-center border border-emerald-500/30 text-[#5FA04E] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 256 289" fill="#5FA04E" xmlns="http://www.w3.org/2000/svg">
-            <path d="M128 0L0 73.9v147.8L128 289.5l128-73.9V73.9L128 0zm0 33.2l96.7 55.8v111.7L128 256.4l-96.7-55.8V89L128 33.2z" />
-            <path d="M128 73.9L49.1 119.4v91.1L128 256l78.9-45.5v-91.1L128 73.9zm-49.1 63.8l49.1-28.3 49.1 28.3v56.7L128 222.8l-49.1-28.3v-56.8z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#022C22] flex items-center justify-center border border-emerald-500/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#5FA04E">
+            <path d="M12 1.8L2.5 7.3v10.9L12 23.7l9.5-5.5V7.3L12 1.8zm0 2.5l7.3 4.2v8.4L12 21.1 4.7 16.9V8.5L12 4.3z" />
           </svg>
         </div>
       ),
@@ -148,9 +138,9 @@ export function TechEcosystem() {
       metric: "Machine Learning API",
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0F172A] flex items-center justify-center border border-blue-500/30 shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M54.2 2C27.4 2 28.3 13.6 28.3 13.6l.1 14.1h26.4v3.7H17.4s-15.4-1.7-15.4 25.1c0 26.8 13.4 25.9 13.4 25.9h8v-11.5s-.4-13.6 13.7-13.6h26.1s13 0 13-12.7V14.7S98.2 2 54.2 2zm-14.7 8.3a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4z" fill="#3776AB" />
-            <path d="M55.8 108c26.8 0 25.9-11.6 25.9-11.6l-.1-14.1H55.2v-3.7h37.4s15.4 1.7 15.4-25.1c0-26.8-13.4-25.9-13.4-25.9h-8v11.5s.4 13.6-13.7 13.6H50.8s-13 0-13 12.7v30S24.2 108 55.8 108zm14.7-8.3a4.2 4.2 0 1 1 0-8.4 4.2 4.2 0 0 1 0 8.4z" fill="#FFD43B" />
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none">
+            <path d="M11.9 2c-5.5 0-5.2 2.4-5.2 2.4v2.5h5.3v.7H4.4S1.2 7.3 1.2 12.8c0 5.5 2.8 5.3 2.8 5.3h1.7v-2.4s-.1-2.8 2.9-2.8h5.3s2.7 0 2.7-2.6V4.4S17.4 2 11.9 2zm-3 1.7a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8z" fill="#3776AB" />
+            <path d="M12.1 22c5.5 0 5.2-2.4 5.2-2.4v-2.5h-5.3v-.7h7.6s3.2.3 3.2-5.2c0-5.5-2.8-5.3-2.8-5.3h-1.7v2.4s.1 2.8-2.9 2.8h-5.3s-2.7 0-2.7 2.6v8.2s-.8 2.4 4.7 2.4zm3-1.7a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z" fill="#FFD43B" />
           </svg>
         </div>
       ),
@@ -164,8 +154,9 @@ export function TechEcosystem() {
       highlighted: true,
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-black flex items-center justify-center border border-emerald-500/30 text-white shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M90 45a22.5 22.5 0 0 0-9.8-18.7L80.2 6.5A23 23 0 0 0 54 1.8L35.7 12.4a22.5 22.5 0 0 0-19.4 3.7A23 23 0 0 0 6.5 35.7L1.8 54a22.5 22.5 0 0 0 3.7 19.4A23 23 0 0 0 26.2 93.5l19.7 11.4A23 23 0 0 0 72 100.2l18.3-10.6a22.5 22.5 0 0 0 19.4-3.7A23 23 0 0 0 109.5 64.3L90 45zm-38 48.5L25 78.4V50.6l15-8.7 27 15.6v27.2l-15 8.8zm-29-50.2l15-8.7 27 15.6v17.4l-15 8.7-27-15.6V43.3zm58 20.3L66 72.3V44.5l-15-8.7 27-15.6v27.2l15 8.8z" />
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 3v18M3 12h18" strokeWidth="1.5" />
           </svg>
         </div>
       ),
@@ -177,18 +168,15 @@ export function TechEcosystem() {
       category: "Backend & AI",
       metric: "Modular Endpoint Sync",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#1F0824] flex items-center justify-center border border-[#E535AB]/30 text-[#E535AB] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none" stroke="#E535AB" strokeWidth="6" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" />
-            <circle cx="50" cy="10" r="7" fill="#E535AB" />
-            <circle cx="85" cy="30" r="7" fill="#E535AB" />
-            <circle cx="85" cy="70" r="7" fill="#E535AB" />
-            <circle cx="50" cy="90" r="7" fill="#E535AB" />
-            <circle cx="15" cy="70" r="7" fill="#E535AB" />
-            <circle cx="15" cy="30" r="7" fill="#E535AB" />
-            <line x1="50" y1="10" x2="50" y2="90" />
-            <line x1="15" y1="30" x2="85" y2="70" />
-            <line x1="15" y1="70" x2="85" y2="30" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#1F0824] flex items-center justify-center border border-[#E535AB]/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="#E535AB" strokeWidth="2">
+            <polygon points="12 2 21 7 21 17 12 22 3 17 3 7" />
+            <circle cx="12" cy="2" r="1.5" fill="#E535AB" />
+            <circle cx="21" cy="7" r="1.5" fill="#E535AB" />
+            <circle cx="21" cy="17" r="1.5" fill="#E535AB" />
+            <circle cx="12" cy="22" r="1.5" fill="#E535AB" />
+            <circle cx="3" cy="17" r="1.5" fill="#E535AB" />
+            <circle cx="3" cy="7" r="1.5" fill="#E535AB" />
           </svg>
         </div>
       ),
@@ -200,10 +188,9 @@ export function TechEcosystem() {
       category: "Backend & AI",
       metric: "Sub-Second Sync",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#111827] flex items-center justify-center border border-purple-500/30 text-white shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none" stroke="#A855F7" strokeWidth="6" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="38" stroke="#A855F7" strokeWidth="6" strokeDasharray="12 6" />
-            <polygon points="55,15 35,52 52,52 45,85 65,48 48,48" fill="#A855F7" stroke="none" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#111827] flex items-center justify-center border border-purple-500/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="#A855F7" strokeWidth="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#A855F7" />
           </svg>
         </div>
       ),
@@ -218,9 +205,9 @@ export function TechEcosystem() {
       metric: "99.999% Data Safety",
       highlighted: true,
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0F172A] flex items-center justify-center border border-[#336791]/40 text-[#336791] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="#336791" xmlns="http://www.w3.org/2000/svg">
-            <path d="M48.5 8C27 8 13.5 24 13.5 45.5c0 28 20 44.5 35 44.5 13 0 20.5-8.5 24-15 3.5 6.5 11 15 24 15 2 0 4-.2 5.5-.5V72c-1.5.5-3.5.5-5 .5-7.5 0-13.5-6.5-16.5-13.5C79 50.5 83 38 83 27.5 83 14 69 8 48.5 8zm-2 14c12.5 0 21.5 5 21.5 14.5 0 9-4.5 18-12 25-5-6-9.5-14.5-9.5-24.5 0-4.5.5-9.5 0-15zm-15 4c3 0 5 2.5 5 5.5s-2 5.5-5 5.5-5.5-2.5-5.5-5.5 2.5-5.5 5.5-5.5z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0F172A] flex items-center justify-center border border-[#336791]/40 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#336791">
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1 14.5v-5h2v5h-2zm-3-3v-2h8v2h-8z" />
           </svg>
         </div>
       ),
@@ -232,10 +219,9 @@ export function TechEcosystem() {
       category: "Database & Cloud",
       metric: "High Scalability",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#022C22] flex items-center justify-center border border-emerald-500/30 text-[#47A248] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="#47A248" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 5C48 18 20 38 20 62c0 16 13 29 30 29s30-13 30-29C80 38 52 18 50 5zm0 79c-12 0-22-9-22-22 0-16 19-32 22-44 3 12 22 28 22 44 0 13-10 22-22 22z" />
-            <path d="M48 25v60h4V25h-4z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#022C22] flex items-center justify-center border border-emerald-500/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#47A248">
+            <path d="M12 2C11.5 5 5 10 5 15.5 5 19.5 8 22 12 22s7-2.5 7-6.5C19 10 12.5 5 12 2zm0 18c-3 0-5-2-5-5 0-4 4-8 5-11 1 3 5 7 5 11 0 3-2 5-5 5z" />
           </svg>
         </div>
       ),
@@ -247,11 +233,10 @@ export function TechEcosystem() {
       category: "Database & Cloud",
       metric: "Auto Migrations",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0F172A] flex items-center justify-center border border-teal-500/30 text-teal-400 shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none" stroke="#2DD4BF" strokeWidth="6" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="15,85 50,15 85,85" strokeLinejoin="round" />
-            <polygon points="50,15 50,85 85,85" fill="#2DD4BF" opacity="0.3" stroke="none" />
-            <line x1="50" y1="15" x2="50" y2="85" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0F172A] flex items-center justify-center border border-teal-500/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" strokeWidth="2">
+            <polygon points="12 2 2 22 22 22" />
+            <line x1="12" y1="2" x2="12" y2="22" stroke="#2DD4BF" strokeWidth="2" />
           </svg>
         </div>
       ),
@@ -263,9 +248,9 @@ export function TechEcosystem() {
       category: "Database & Cloud",
       metric: "Sub-Millisecond",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#450A0A] flex items-center justify-center border border-red-500/30 text-[#DC382D] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="#DC382D" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10L10 32v36l40 22 40-22V32L50 10zm0 12l25 14-25 14-25-14 25-14zm-28 24l22 12v23L22 69V46zm56 23l-22 12V58l22-12v23z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#450A0A] flex items-center justify-center border border-red-500/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#DC382D">
+            <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 3l6.5 3.3L12 11.5 5.5 8.3 12 5zm-7.5 5.2l6.5 3.3v6.7L4.5 17V10.2zm15 6.7L13 20.2v-6.7l6.5-3.3v6.7z" />
           </svg>
         </div>
       ),
@@ -278,9 +263,9 @@ export function TechEcosystem() {
       metric: "250+ Edge Cities",
       highlighted: true,
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#451A03] flex items-center justify-center border border-amber-500/30 text-[#F38020] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="#F38020" xmlns="http://www.w3.org/2000/svg">
-            <path d="M72 45c-2-12-13-21-25-21-10 0-19 6-23 15-9 1-16 8-16 18 0 10 8 18 18 18h46c9 0 16-7 16-16 0-8-6-14-14-14zm-48 23c-6 0-11-5-11-11 0-6 5-11 11-11 2 0 4 .5 6 1.5L32 50l2-4.5c3-6 9-10 16-10 9 0 16 7 16 16v3h3c5 0 9 4 9 9s-4 9-9 9H24z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#451A03] flex items-center justify-center border border-amber-500/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#F38020">
+            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z" />
           </svg>
         </div>
       ),
@@ -292,10 +277,10 @@ export function TechEcosystem() {
       category: "Database & Cloud",
       metric: "Enterprise Infra",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#1E293B] flex items-center justify-center border border-amber-500/30 text-[#FF9900] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="#FF9900" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 35h12l10 32 10-32h12l-16 45H38L22 35zm48 10c0-6 4-9 11-9 6 0 10 2 13 6l-6 5c-2-2-4-3-7-3-3 0-5 1-5 3s2 3 5 4l5 2c6 2 9 6 9 11 0 7-6 11-13 11-7 0-12-3-15-7l6-5c2 3 5 4 9 4 3 0 5-1 5-3s-2-3-5-4l-5-2c-6-2-9-6-9-11z" />
-            <path d="M15 82c25 12 55 12 70 0l-5-5c-12 10-38 10-60 0l-5 5z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#1E293B] flex items-center justify-center border border-amber-500/30 shadow-xs shrink-0 font-mono font-extrabold text-[#FF9900]">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#FF9900">
+            <path d="M6.5 7h3l2.5 8 2.5-8h3l-4 12H8.5L6.5 7zm13 3c0-1.7 1.3-3 3-3s3 1.3 3 3-1.3 3-3 3-3-1.3-3-3z" />
+            <path d="M3 19c6 3 14 3 18 0" stroke="#FF9900" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </div>
       ),
@@ -308,8 +293,8 @@ export function TechEcosystem() {
       metric: "Instant Deploy",
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-black flex items-center justify-center border border-slate-800 text-white shadow-xs shrink-0">
-          <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 75 65" xmlns="http://www.w3.org/2000/svg">
-            <path d="M37.5 0L75 65H0L37.5 0Z" />
+          <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="white">
+            <polygon points="12 2 24 22 0 22" />
           </svg>
         </div>
       ),
@@ -322,8 +307,8 @@ export function TechEcosystem() {
       metric: "Zero Downtime",
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0284C7] flex items-center justify-center text-white shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M90 48c-2 0-4 1-5 2-3-2-7-3-12-3-1 0-3 0-4 .5V35H55v12H41V35H27v12H13v12H0c1 16 14 28 32 28 22 0 42-12 50-25 3 0 6-2 8-5 1-2 1-5 0-7zM24 41h6v6h-6v-6zm14 0h6v6h-6v-6zm14 0h6v6h-6v-6zm-28 12h6v6h-6v-6zm14 0h6v6h-6v-6zm14 0h6v6h-6v-6zm14 0h6v6h-6v-6z" />
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="white">
+            <path d="M13 4h3v3h-3V4zm-4 0h3v3H9V4zm-4 4h3v3H5V8zm4 0h3v3H9V8zm4 0h3v3h-3V8zm4 0h3v3h-3V8zm-12 4h3v3H5v-3zm4 0h3v3H9v-3zm4 0h3v3h-3v-3zm4 0h3v3h-3v-3zM1.2 14.5C.5 15.5 0 17 0 18.5c0 3 2.5 5.5 5.5 5.5 8 0 15.5-4 18.5-9-.8.1-1.6.1-2.4 0-1.8.8-3.9 1-5.6.3-2.3 2-5.5 2.5-8.5 1.5-2-.6-3.8-2-4.8-3.8z" />
           </svg>
         </div>
       ),
@@ -336,8 +321,8 @@ export function TechEcosystem() {
       metric: "Row Level Security",
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#022C22] flex items-center justify-center border border-emerald-400/30 text-[#3ECF8E] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M56 8L15 58h30l-7 34 41-50H49l7-34z" fill="#3ECF8E" />
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#3ECF8E">
+            <path d="M13 2L3 14h8l-2 8 12-12h-8l2-8z" />
           </svg>
         </div>
       ),
@@ -353,8 +338,10 @@ export function TechEcosystem() {
       highlighted: true,
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#312E81] flex items-center justify-center border border-indigo-500/30 text-white shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M85 30H15c-4 0-7 3-7 7v36c0 4 3 7 7 7h70c4 0 7-3 7-7V37c0-4-3-7-7-7zm-63 8h16v8H22v-8zm56 34H22v-8h56v8zm0-14H42v-8h36v8z" />
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="white">
+            <rect x="2" y="5" width="20" height="14" rx="3" fill="none" stroke="white" strokeWidth="2" />
+            <line x1="2" y1="10" x2="22" y2="10" stroke="white" strokeWidth="2" />
+            <rect x="6" y="14" width="4" height="2" fill="white" />
           </svg>
         </div>
       ),
@@ -367,8 +354,8 @@ export function TechEcosystem() {
       metric: "UPI & Netbanking",
       logo: (
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0284C7] flex items-center justify-center text-white shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M25 85L50 15h25L45 85H25zm20-30l15-40h15L60 55H45z" />
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="white">
+            <path d="M7 21L14 3h6L13 21H7zm5-7l4-10h5L16 14h-4z" />
           </svg>
         </div>
       ),
@@ -380,9 +367,9 @@ export function TechEcosystem() {
       category: "Security & Payments",
       metric: "2FA & SSO",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#451A03] flex items-center justify-center border border-orange-500/30 text-[#EB5424] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="#EB5424" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10L15 25v30c0 22 15 40 35 45 20-5 35-23 35-45V25L50 10zm0 15l20 9v21c0 13-9 24-20 28-11-4-20-15-20-28V34l20-9z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#451A03] flex items-center justify-center border border-orange-500/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#EB5424">
+            <path d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4zm0 4l6 2.7v4.3c0 3.8-2.6 7.4-6 8.5-3.4-1.1-6-4.7-6-8.5V7.7L12 5z" />
           </svg>
         </div>
       ),
@@ -394,9 +381,9 @@ export function TechEcosystem() {
       category: "Security & Payments",
       metric: "Auto Test Build",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0F172A] flex items-center justify-center border border-amber-500/30 text-[#F05032] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="#F05032" xmlns="http://www.w3.org/2000/svg">
-            <path d="M92 42L58 8a12 12 0 0 0-17 0L8 42a12 12 0 0 0 0 17l33 33a12 12 0 0 0 17 0l34-34a12 12 0 0 0 0-16zM67 60a7 7 0 1 1-7-7c1 0 3 0 4 1v-9l-9-9v24a7 7 0 1 1-7-7V29a7 7 0 1 1 7 7v16l10 10v-9a7 7 0 1 1 2 7z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#0F172A] flex items-center justify-center border border-amber-500/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#F05032">
+            <path d="M21.7 10.3l-8-8c-.4-.4-1-.4-1.4 0l-2.4 2.4 3 3c.7-.2 1.5 0 2 .6.6.6.7 1.5.3 2.2l2.9 2.9c.7-.4 1.6-.3 2.2.3.8.8.8 2.1 0 2.8s-2.1.8-2.8 0c-.6-.6-.7-1.5-.3-2.2l-2.7-2.7v6.6c.2.1.4.3.5.5.8.8.8 2.1 0 2.8s-2.1.8-2.8 0-2.1-.8 0-2.8c.3-.3.7-.5 1.1-.6V9.6c-.4-.1-.8-.3-1.1-.6-.8-.8-.8-2.1 0-2.8.6-.6 1.4-.7 2.1-.4l-3-3L2.3 10.3c-.4.4-.4 1 0 1.4l8 8c.4.4 1 .4 1.4 0l10-10c.4-.4.4-1 0-1.4z" />
           </svg>
         </div>
       ),
@@ -408,9 +395,9 @@ export function TechEcosystem() {
       category: "Security & Payments",
       metric: "DDoS Mitigation",
       logo: (
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#022C22] flex items-center justify-center border border-emerald-500/30 text-[#009639] shadow-xs shrink-0">
-          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="#009639" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 15h15l30 45V15h15v70H65L35 40v45H20V15z" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#022C22] flex items-center justify-center border border-emerald-500/30 shadow-xs shrink-0">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="#009639">
+            <path d="M5 3h3.6l7.4 11.2V3H19v18h-3.6L8 9.8V21H5V3z" />
           </svg>
         </div>
       ),
