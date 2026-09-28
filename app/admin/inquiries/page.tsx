@@ -67,7 +67,7 @@ interface OfferConfig {
   expiresAt?: string | null;
 }
 
-const DEFAULT_PIN = "1234";
+const ADMIN_PIN = process.env.NEXT_PUBLIC_ADMIN_PIN || process.env.ADMIN_PIN || "052005";
 
 export default function RealAdminInquiriesPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -120,14 +120,14 @@ export default function RealAdminInquiriesPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (pinInput === DEFAULT_PIN) {
+    if (pinInput === ADMIN_PIN) {
       setIsAuthenticated(true);
       sessionStorage.setItem("vs_admin_auth", "true");
       setPinError("");
       fetchInquiries();
       fetchOffers();
     } else {
-      setPinError("Invalid Admin PIN. Try '1234'.");
+      setPinError("Invalid Security PIN. Access denied.");
     }
   };
 
@@ -335,7 +335,7 @@ export default function RealAdminInquiriesPage() {
                 required
                 value={pinInput}
                 onChange={(e) => setPinInput(e.target.value)}
-                placeholder="Enter Admin PIN (Default: 1234)"
+                placeholder="Enter Admin PIN"
                 className="w-full p-3.5 text-center text-sm font-mono tracking-widest rounded-xl border border-slate-700 bg-slate-950 text-white focus:outline-none focus:border-[#2563EB]"
               />
               {pinError && <span className="text-xs text-red-400 mt-2 block">{pinError}</span>}
@@ -346,9 +346,7 @@ export default function RealAdminInquiriesPage() {
             </Button>
           </form>
 
-          <p className="text-[11px] text-slate-500 mt-6">
-            Default Security PIN: <code className="text-slate-300">1234</code>
-          </p>
+
         </div>
       </main>
     );
@@ -412,11 +410,10 @@ export default function RealAdminInquiriesPage() {
         <Container size="default" className="flex items-center gap-6 text-xs font-bold">
           <button
             onClick={() => setAdminTab("inquiries")}
-            className={`py-3.5 border-b-2 transition-colors flex items-center gap-2 cursor-pointer ${
-              adminTab === "inquiries"
-                ? "border-[#2563EB] text-[#2563EB]"
-                : "border-transparent text-[#5F6368] hover:text-[#111111]"
-            }`}
+            className={`py-3.5 border-b-2 transition-colors flex items-center gap-2 cursor-pointer ${adminTab === "inquiries"
+              ? "border-[#2563EB] text-[#2563EB]"
+              : "border-transparent text-[#5F6368] hover:text-[#111111]"
+              }`}
           >
             <FileText className="w-4 h-4" />
             <span>Client Inquiries ({totalCount})</span>
@@ -424,11 +421,10 @@ export default function RealAdminInquiriesPage() {
 
           <button
             onClick={() => setAdminTab("offers")}
-            className={`py-3.5 border-b-2 transition-colors flex items-center gap-2 cursor-pointer ${
-              adminTab === "offers"
-                ? "border-[#2563EB] text-[#2563EB]"
-                : "border-transparent text-[#5F6368] hover:text-[#111111]"
-            }`}
+            className={`py-3.5 border-b-2 transition-colors flex items-center gap-2 cursor-pointer ${adminTab === "offers"
+              ? "border-[#2563EB] text-[#2563EB]"
+              : "border-transparent text-[#5F6368] hover:text-[#111111]"
+              }`}
           >
             <Gift className="w-4 h-4 text-[#2563EB]" />
             <span>Offer &amp; Announcement Manager</span>
@@ -477,11 +473,10 @@ export default function RealAdminInquiriesPage() {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                      activeTab === tab
-                        ? "bg-[#111111] text-white shadow-2xs"
-                        : "bg-[#F7F8FA] text-[#5F6368] border border-[#E5E7EB] hover:bg-white hover:text-[#111111]"
-                    }`}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${activeTab === tab
+                      ? "bg-[#111111] text-white shadow-2xs"
+                      : "bg-[#F7F8FA] text-[#5F6368] border border-[#E5E7EB] hover:bg-white hover:text-[#111111]"
+                      }`}
                   >
                     {tab}
                   </button>
@@ -548,17 +543,16 @@ export default function RealAdminInquiriesPage() {
                           <select
                             value={currentStatus}
                             onChange={(e) => handleStatusChange(item.ticketId, e.target.value)}
-                            className={`text-xs font-bold px-3 py-1.5 rounded-xl border focus:outline-none cursor-pointer ${
-                              currentStatus === "New"
-                                ? "bg-blue-50 text-[#2563EB] border-blue-200"
-                                : currentStatus === "In Contact"
+                            className={`text-xs font-bold px-3 py-1.5 rounded-xl border focus:outline-none cursor-pointer ${currentStatus === "New"
+                              ? "bg-blue-50 text-[#2563EB] border-blue-200"
+                              : currentStatus === "In Contact"
                                 ? "bg-amber-50 text-amber-600 border-amber-200"
                                 : currentStatus === "Quoted"
-                                ? "bg-purple-50 text-purple-600 border-purple-200"
-                                : currentStatus === "Converted"
-                                ? "bg-emerald-50 text-emerald-600 border-emerald-200"
-                                : "bg-gray-100 text-gray-600 border-gray-200"
-                            }`}
+                                  ? "bg-purple-50 text-purple-600 border-purple-200"
+                                  : currentStatus === "Converted"
+                                    ? "bg-emerald-50 text-emerald-600 border-emerald-200"
+                                    : "bg-gray-100 text-gray-600 border-gray-200"
+                              }`}
                           >
                             <option value="New">🟢 New Lead</option>
                             <option value="In Contact">🟡 In Contact</option>
@@ -762,11 +756,10 @@ export default function RealAdminInquiriesPage() {
                   <button
                     type="button"
                     onClick={() => setOfferForm({ ...offerForm, isActive: !offerForm.isActive })}
-                    className={`px-3 py-1 rounded-full text-xs font-bold transition-colors cursor-pointer ${
-                      offerForm.isActive
-                        ? "bg-[#10B981] text-white"
-                        : "bg-gray-200 text-gray-700"
-                    }`}
+                    className={`px-3 py-1 rounded-full text-xs font-bold transition-colors cursor-pointer ${offerForm.isActive
+                      ? "bg-[#10B981] text-white"
+                      : "bg-gray-200 text-gray-700"
+                      }`}
                   >
                     {offerForm.isActive ? "🟢 Active Live" : "⚪ Inactive"}
                   </button>
@@ -946,17 +939,16 @@ export default function RealAdminInquiriesPage() {
                 {/* Simulated Preview Rendering */}
                 <div className="border border-dashed border-[#D1D5DB] rounded-2xl p-4 bg-[#F7F8FA]">
                   <div
-                    className={`rounded-2xl p-4 text-white shadow-xl ${
-                      offerForm.theme === "blue"
-                        ? "bg-[#0F172A] border border-[#2563EB]/40"
-                        : offerForm.theme === "emerald"
+                    className={`rounded-2xl p-4 text-white shadow-xl ${offerForm.theme === "blue"
+                      ? "bg-[#0F172A] border border-[#2563EB]/40"
+                      : offerForm.theme === "emerald"
                         ? "bg-[#064E3B] border border-[#10B981]/40"
                         : offerForm.theme === "amber"
-                        ? "bg-[#78350F] border border-[#F59E0B]/40"
-                        : offerForm.theme === "purple"
-                        ? "bg-[#4C1D95] border border-purple-500/40"
-                        : "bg-[#111111] border border-slate-700"
-                    }`}
+                          ? "bg-[#78350F] border border-[#F59E0B]/40"
+                          : offerForm.theme === "purple"
+                            ? "bg-[#4C1D95] border border-purple-500/40"
+                            : "bg-[#111111] border border-slate-700"
+                      }`}
                   >
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-[9px] font-mono font-bold uppercase bg-white/20 px-2 py-0.5 rounded text-white">
