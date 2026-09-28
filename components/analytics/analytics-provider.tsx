@@ -8,12 +8,20 @@ import { GA_MEASUREMENT_ID, META_PIXEL_ID, pageview } from "@/lib/analytics";
 function RouteTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const lastTrackedRef = React.useRef<{ url: string; time: number }>({ url: "", time: 0 });
 
   useEffect(() => {
     if (pathname) {
       const url = searchParams?.toString()
         ? `${pathname}?${searchParams.toString()}`
         : pathname;
+
+      const now = Date.now();
+      // Deduplicate rapid execution (e.g., React StrictMode double effect calls within 2000ms for exact same path)
+      if (lastTrackedRef.current.url === url && now - lastTrackedRef.current.time < 2000) {
+        return;
+      }
+      lastTrackedRef.current = { url, time: now };
 
       // GA4 & Meta Pixel Client Pageview
       pageview(url);

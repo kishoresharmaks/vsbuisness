@@ -104,32 +104,60 @@ export async function POST(req: NextRequest) {
     };
 
     // Save to File System Fallback
+    let isFsDuplicate = false;
     try {
       ensureDataDir();
-      let logs = [];
+      let logs: any[] = [];
       if (fs.existsSync(LOGS_FILE)) {
         const fileData = fs.readFileSync(LOGS_FILE, "utf-8");
         logs = JSON.parse(fileData);
       }
-      logs.unshift(logEntry);
-      // Keep max 2000 logs in JSON file
-      if (logs.length > 2000) logs = logs.slice(0, 2000);
-      fs.writeFileSync(LOGS_FILE, JSON.stringify(logs, null, 2), "utf-8");
+
+      // Check for rapid duplicate entries (same IP + path + device/browser within 2.5s)
+      const nowMs = Date.now();
+      isFsDuplicate = logs.some((existing: any) => {
+        const existingMs = new Date(existing.timestamp).getTime();
+        const sameIp = existing.ip === ip;
+        const samePath = existing.path === reqPath;
+        const sameDevice = existing.device === device;
+        const sameBrowser = existing.browser === browser;
+        return sameIp && samePath && sameDevice && sameBrowser && Math.abs(nowMs - existingMs) < 2500;
+      });
+
+      if (!isFsDuplicate) {
+        logs.unshift(logEntry);
+        // Keep max 2000 logs in JSON file
+        if (logs.length > 2000) logs = logs.slice(0, 2000);
+        fs.writeFileSync(LOGS_FILE, JSON.stringify(logs, null, 2), "utf-8");
+      }
     } catch (fsErr) {
       console.error("FS Log Error:", fsErr);
     }
 
-    // Save to MongoDB
+    // Save to MongoDB with deduplication check
     try {
-      const conn = await connectToDatabase();
-      if (conn) {
-        await VisitorLogModel.create(logEntry);
+      if (!isFsDuplicate) {
+        const conn = await connectToDatabase();
+        if (conn) {
+          const recentThreshold = new Date(Date.now() - 2500);
+          const existingDoc = await VisitorLogModel.findOne({
+            ip,
+            path: reqPath,
+            device,
+            browser,
+            timestamp: { $gte: recentThreshold },
+          });
+
+          if (!existingDoc) {
+            await VisitorLogModel.create(logEntry);
+          }
+        }
       }
     } catch (dbErr) {
       console.error("DB Log Error:", dbErr);
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, deduplicated: isFsDuplicate });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
