@@ -179,7 +179,10 @@ export async function GET(req: NextRequest) {
     // Top Pages / Routes Breakdown
     const pageMap: Record<string, number> = {};
     logs.forEach((log) => {
-      const p = log.path || "/";
+      let p = log.path || "/";
+      p = p.split("?")[0].split("#")[0];
+      if (p.length > 1 && p.endsWith("/")) p = p.slice(0, -1);
+      if (p === "/admin/enquiries") p = "/admin/inquiries";
       pageMap[p] = (pageMap[p] || 0) + 1;
     });
 

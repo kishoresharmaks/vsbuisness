@@ -47,10 +47,23 @@ function cleanReferrer(ref: string, host: string = "") {
   return "External Referral";
 }
 
+function normalizePath(rawPath: string): string {
+  if (!rawPath) return "/";
+  let cleaned = rawPath.split("?")[0].split("#")[0];
+  if (cleaned.length > 1 && cleaned.endsWith("/")) {
+    cleaned = cleaned.slice(0, -1);
+  }
+  if (cleaned === "/admin/enquiries") {
+    cleaned = "/admin/inquiries";
+  }
+  return cleaned || "/";
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { path: reqPath = "/", referrer: reqRef = "", userAgent: reqUa = "" } = body;
+    const { path: rawReqPath = "/", referrer: reqRef = "", userAgent: reqUa = "" } = body;
+    const reqPath = normalizePath(rawReqPath);
 
     // Get IP Address
     const forwardedFor = req.headers.get("x-forwarded-for");
