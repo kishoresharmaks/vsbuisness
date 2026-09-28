@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { trackLeadConversion } from "@/lib/analytics";
 import { StepIndicator } from "@/components/project-form/step-indicator";
 import {
   ArrowLeft,
@@ -337,11 +338,31 @@ export function ProjectBuilder() {
 
       if (resData.success && resData.ticketId) {
         setTicketId(resData.ticketId);
+        trackLeadConversion({
+          projectType: formData.projectType,
+          servicesNeeded: formData.servicesNeeded,
+          budgetRange: formData.budgetRange,
+          ticketId: resData.ticketId,
+        });
       } else {
-        setTicketId(`VS-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`);
+        const fallbackTicket = `VS-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+        setTicketId(fallbackTicket);
+        trackLeadConversion({
+          projectType: formData.projectType,
+          servicesNeeded: formData.servicesNeeded,
+          budgetRange: formData.budgetRange,
+          ticketId: fallbackTicket,
+        });
       }
     } catch {
-      setTicketId(`VS-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`);
+      const fallbackTicket = `VS-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      setTicketId(fallbackTicket);
+      trackLeadConversion({
+        projectType: formData.projectType,
+        servicesNeeded: formData.servicesNeeded,
+        budgetRange: formData.budgetRange,
+        ticketId: fallbackTicket,
+      });
     } finally {
       setIsSubmitting(false);
       setSubmitted(true);

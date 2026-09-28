@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { OfferNotification } from "@/components/ui/offer-notification";
+import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -104,6 +105,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-white text-[#111111] selection:bg-[#2563EB] selection:text-white relative">
+        <AnalyticsProvider />
         {children}
         <OfferNotification />
       </body>
