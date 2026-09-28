@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/typography";
 import {
   ArrowRight,
   CheckCircle2,
@@ -15,10 +13,6 @@ import {
   Cpu,
   Clock,
   Zap,
-  ShieldCheck,
-  Code2,
-  Check,
-  TrendingUp,
   LucideIcon,
 } from "lucide-react";
 
@@ -27,12 +21,9 @@ interface CategoryOption {
   label: string;
   icon: LucideIcon;
   title: string;
-  subtitle: string;
   description: string;
   estimatedTimeline: string;
   speedRating: string;
-  techStack: string[];
-  features: string[];
   deliverables: string[];
 }
 
@@ -43,13 +34,10 @@ export function ProjectSelector() {
       label: "E-Commerce",
       icon: ShoppingBag,
       title: "Multi-Vendor Stores & D2C Commerce",
-      subtitle: "High-Conversion Storefronts & Seller Portals",
       description:
-        "Engineered for high conversion with instant cart checkout, seller store dashboards, automated inventory sync, and Stripe/Razorpay integration.",
+        "High-conversion online storefronts engineered with instant cart checkout, seller store portals, inventory sync, and Razorpay/Stripe integration.",
       estimatedTimeline: "2 - 3 Weeks",
       speedRating: "99/100 PageSpeed",
-      techStack: ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Razorpay", "Tailwind v4"],
-      features: ["Multi-Vendor Marketplace", "Instant UPI & Stripe Checkout", "Inventory & Order Sync"],
       deliverables: ["Custom Storefront UI", "Admin Management Panel", "Sub-Second Cart Load"],
     },
     {
@@ -57,13 +45,10 @@ export function ProjectSelector() {
       label: "Enterprise Systems",
       icon: Building2,
       title: "Smart Coworking & B2B Supply Portals",
-      subtitle: "Real-Time Booking & Ledger Management",
       description:
-        "Real-time reactive booking engines, interactive 2D desk floor maps, collision-free scheduling, and automated B2B customer ledgers.",
+        "Real-time reactive booking portals, interactive 2D desk floor maps, automated QR code entry billing, and B2B customer ledgers.",
       estimatedTimeline: "3 - 4 Weeks",
       speedRating: "100/100 Reliability",
-      techStack: ["Next.js", "TypeScript", "Socket.io", "PostgreSQL", "Prisma", "Express"],
-      features: ["Interactive 2D Desk Map", "Automated QR Billing", "B2B Ledger System"],
       deliverables: ["Collision-Free Scheduler", "Real-Time Push Sync", "POS Ledger Portal"],
     },
     {
@@ -71,13 +56,10 @@ export function ProjectSelector() {
       label: "AI & Web Platforms",
       icon: Sparkles,
       title: "AI NLP Translators & Smart Assistants",
-      subtitle: "Intelligent Generative AI & Vector Search",
       description:
         "Intelligent AI query tools converting plain English into database charts, 24/7 AI tutor bots, and offline-first PWA applications.",
       estimatedTimeline: "2 - 4 Weeks",
       speedRating: "<100ms AI Latency",
-      techStack: ["React 19", "TypeScript", "Node.js", "OpenAI / Claude AI", "Recharts", "PWA"],
-      features: ["Plain English AI Query", "Dynamic Chart Generator", "Offline-First Storage"],
       deliverables: ["LLM Assistant Gateway", "Automated Analytics", "24/7 Bot Automation"],
     },
     {
@@ -85,13 +67,10 @@ export function ProjectSelector() {
       label: "Websites",
       icon: Globe,
       title: "High-Performance Modern Marketing Sites",
-      subtitle: "Sub-Second Speeds & Maximum Search Visibility",
       description:
         "Fast, responsive marketing showcase sites built with fluid typography, sub-second page loads, and Google SEO architecture.",
       estimatedTimeline: "1 - 2 Weeks",
       speedRating: "100/100 Core Web Vitals",
-      techStack: ["Next.js App Router", "Tailwind CSS", "TypeScript", "Framer Motion", "Headless CMS"],
-      features: ["Fluid Responsive UX", "Structured JSON-LD Schema", "CMS Content Controls"],
       deliverables: ["Custom Brand UI/UX", "Google Indexing Setup", "Sub-Second Load Times"],
     },
     {
@@ -99,30 +78,15 @@ export function ProjectSelector() {
       label: "Custom Software",
       icon: Cpu,
       title: "Tailored Business Software & Microservices",
-      subtitle: "Bespoke Enterprise Systems & APIs",
       description:
         "Bespoke software solutions, high-throughput microservice APIs, and automated workflow orchestrations built around your specific business rules.",
       estimatedTimeline: "3 - 5 Weeks",
       speedRating: "99.99% Uptime",
-      techStack: ["TypeScript", "Node.js", "Prisma ORM", "PostgreSQL", "Cloudflare Edge", "AWS"],
-      features: ["Custom Business Workflows", "High-Speed REST/GraphQL", "Bank-Grade Encryption"],
       deliverables: ["Microservice Architecture", "Role-Based Access", "24/7 Cloud Edge Infra"],
     },
   ];
 
   const [activeCategory, setActiveCategory] = useState<CategoryOption>(categories[0]);
-  const [selectedFeatures, setSelectedFeatures] = useState<{ [key: string]: boolean }>({
-    "0": true,
-    "1": true,
-    "2": true,
-  });
-
-  const toggleFeature = (index: number) => {
-    setSelectedFeatures((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
-  };
 
   const handleBuildClick = () => {
     // Map selector category ID to ProjectBuilder projectType
@@ -205,7 +169,7 @@ export function ProjectSelector() {
 
             <div className="flex items-center gap-2 text-xs text-[#5F6368] font-mono shrink-0 bg-white border border-[#E5E7EB] px-3.5 py-1.5 rounded-full shadow-2xs self-start sm:self-auto">
               <Zap className="w-3.5 h-3.5 text-[#2563EB]" />
-              <span>Select scope category below</span>
+              <span>Swipe or click a category</span>
             </div>
           </div>
 
@@ -218,10 +182,7 @@ export function ProjectSelector() {
                 <button
                   key={cat.id}
                   type="button"
-                  onClick={() => {
-                    setActiveCategory(cat);
-                    setSelectedFeatures({ "0": true, "1": true, "2": true });
-                  }}
+                  onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2.5 rounded-full text-xs font-extrabold whitespace-nowrap transition-all duration-200 cursor-pointer snap-start flex items-center gap-2 ${
                     isActive
                       ? "bg-[#2563EB] text-white shadow-md shadow-[#2563EB]/25 scale-102"
@@ -235,7 +196,7 @@ export function ProjectSelector() {
             })}
           </div>
 
-          {/* Dynamic Contextual Scope Panel */}
+          {/* Clean Contextual Scope Panel */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory.id}
@@ -246,75 +207,18 @@ export function ProjectSelector() {
               className="bg-white border border-[#E5E7EB] rounded-2xl p-5 sm:p-7 flex flex-col lg:flex-row justify-between gap-6 lg:gap-8 items-stretch shadow-2xs text-left"
             >
               
-              {/* Left Column: Scope Details & Feature Checkboxes */}
-              <div className="flex flex-col gap-4 max-w-2xl grow justify-between">
-                <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="text-[10px] font-mono font-bold text-[#2563EB] uppercase tracking-wider bg-[#EFF6FF] px-2 py-0.5 rounded-md">
-                      {activeCategory.subtitle}
-                    </span>
-                  </div>
-
+              {/* Left Column: Scope Overview */}
+              <div className="flex flex-col gap-3 max-w-xl grow justify-center">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-[#2563EB] shrink-0" />
                   <h4 className="text-xl sm:text-2xl font-extrabold text-[#111111] tracking-tight leading-snug">
                     {activeCategory.title}
                   </h4>
-
-                  <p className="text-xs sm:text-sm text-[#5F6368] leading-relaxed mt-2 font-medium">
-                    {activeCategory.description}
-                  </p>
                 </div>
 
-                {/* Interactive Feature Selectors */}
-                <div>
-                  <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-2">
-                    Included Features & Capabilities:
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    {activeCategory.features.map((feat, idx) => {
-                      const isChecked = selectedFeatures[idx] !== false;
-                      return (
-                        <div
-                          key={feat}
-                          onClick={() => toggleFeature(idx)}
-                          className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center gap-2 cursor-pointer transition-all ${
-                            isChecked
-                              ? "bg-[#EFF6FF] border-[#BFDBFE] text-[#2563EB] shadow-2xs"
-                              : "bg-slate-50 border-slate-200 text-slate-400 line-through opacity-70"
-                          }`}
-                        >
-                          <div
-                            className={`w-4 h-4 rounded-md flex items-center justify-center border shrink-0 ${
-                              isChecked
-                                ? "bg-[#2563EB] border-[#2563EB] text-white"
-                                : "bg-white border-slate-300"
-                            }`}
-                          >
-                            {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
-                          </div>
-                          <span className="truncate">{feat}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Tech Stack Badges */}
-                <div className="pt-2 border-t border-[#E5E7EB]/70">
-                  <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-2">
-                    Architected With:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {activeCategory.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="bg-[#F8FAFC] border border-[#E5E7EB] text-[11px] font-mono font-semibold text-slate-700 py-1 px-3 rounded-full shadow-2xs"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
+                <p className="text-xs sm:text-sm text-[#5F6368] leading-relaxed font-medium">
+                  {activeCategory.description}
+                </p>
               </div>
 
               {/* Right Column: Live Timeline, Metrics & CTA */}
