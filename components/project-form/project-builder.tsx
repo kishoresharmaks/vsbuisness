@@ -160,7 +160,7 @@ export function ProjectBuilder() {
   const [formData, setFormData] = useState({
     projectType: "Website",
     servicesNeeded: "Full Product",
-    budgetRange: "₹2,00,000",
+    budgetRange: "",
     timeline: "Standard (2-4 Weeks)",
     customFeatureText: "",
     description: "",
@@ -418,7 +418,9 @@ export function ProjectBuilder() {
               </div>
               <div className="flex justify-between border-b border-[#E5E7EB] pb-2 text-[#5F6368]">
                 <span>Budget Investment Level:</span>
-                <strong className="text-[#2563EB] font-bold">{formData.budgetRange}</strong>
+                <strong className={formData.budgetRange ? "text-[#2563EB] font-bold" : "text-slate-500 font-semibold"}>
+                  {formData.budgetRange || "Flexible / Not specified"}
+                </strong>
               </div>
               <div className="flex justify-between border-b border-[#E5E7EB] pb-2 text-[#5F6368]">
                 <span>Timeline:</span>
@@ -477,7 +479,7 @@ export function ProjectBuilder() {
                   setFormData({
                     projectType: "Website",
                     servicesNeeded: "Full Product",
-                    budgetRange: "₹2,00,000",
+                    budgetRange: "",
                     timeline: "Standard (2-4 Weeks)",
                     customFeatureText: "",
                     description: "",
@@ -1035,7 +1037,9 @@ export function ProjectBuilder() {
 
                   <div>
                     <span className="text-[#5F6368] block text-[11px]">Budget Investment Level:</span>
-                    <strong className="text-[#2563EB] font-bold">{formData.budgetRange || "Not specified yet"}</strong>
+                    <strong className={formData.budgetRange ? "text-[#2563EB] font-bold" : "text-slate-400 font-medium italic"}>
+                      {formData.budgetRange || "Not Selected"}
+                    </strong>
                   </div>
 
                   <div>
