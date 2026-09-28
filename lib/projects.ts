@@ -91,7 +91,7 @@ export const projectsData: Project[] = [
     slug: "indian-agri",
     title: "Indian Agriculture B2B",
     subtitle: "B2B Agriculture Supplies Store & Order Tracking System",
-    category: "Enterprise Systems",
+    category: "E-Commerce",
     clientRole: "Full Stack Developer",
     badge: "Client B2B Portal",
     liveUrl: "http://indianagriculture.online/",

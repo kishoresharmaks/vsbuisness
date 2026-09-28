@@ -182,10 +182,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
   };
 
   return (
-    <div className="group relative rounded-3xl border border-[#E5E7EB] bg-white p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full w-[84vw] sm:w-[380px] shrink-0 snap-center">
-      <div className="flex flex-col gap-4">
+    <div className="group relative rounded-3xl border border-[#E5E7EB] bg-white p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-[560px] sm:h-[580px] w-[86vw] sm:w-[380px] shrink-0 snap-center select-none">
+      <div className="flex flex-col gap-3.5 h-full justify-between">
         {/* Top Badge Bar */}
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-2 shrink-0">
           {/* Category Pill Tag */}
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] shadow-2xs">
             {getCategoryIcon()}
@@ -204,10 +204,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Realistic Browser Window Frame Container */}
         <Link
           href={`/work/${project.slug}`}
-          className="w-full rounded-2xl bg-[#F8FAFC] border border-[#E5E7EB] p-3 sm:p-4 flex flex-col gap-3 relative overflow-hidden group-hover:border-[#FF5722]/30 transition-all duration-300"
+          className="w-full h-[175px] rounded-2xl bg-[#F8FAFC] border border-[#E5E7EB] p-3 flex flex-col justify-between relative overflow-hidden group-hover:border-[#FF5722]/40 transition-all duration-300 shrink-0"
         >
           {/* Simulated Browser Bar Header */}
-          <div className="flex items-center justify-between pb-2 border-b border-[#E5E7EB] text-[11px] text-[#5F6368]">
+          <div className="flex items-center justify-between pb-1.5 border-b border-[#E5E7EB] text-[11px] text-[#5F6368] shrink-0">
             <div className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block" />
               <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block" />
@@ -215,7 +215,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </div>
 
             {/* URL Address Search Bar */}
-            <div className="flex items-center gap-1 bg-white border border-[#E5E7EB] px-3 py-0.5 rounded-full font-mono text-[10px] text-slate-500 truncate max-w-[160px] sm:max-w-[200px]">
+            <div className="flex items-center gap-1 bg-white border border-[#E5E7EB] px-3 py-0.5 rounded-full font-mono text-[10px] text-slate-500 truncate max-w-[150px] sm:max-w-[190px]">
               <Search className="w-2.5 h-2.5 text-slate-400 shrink-0" />
               <span className="truncate">
                 {project.liveUrl
@@ -238,23 +238,25 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
 
           {/* Browser Content Inner Mock Graphic */}
-          {renderBrowserGraphic()}
+          <div className="grow flex flex-col justify-center pt-1.5">
+            {renderBrowserGraphic()}
+          </div>
         </Link>
 
         {/* Project Title & Subtitle */}
-        <div className="mt-1">
+        <div className="shrink-0 flex flex-col gap-1">
           <Link href={`/work/${project.slug}`}>
-            <h3 className="text-lg sm:text-xl font-extrabold text-[#111111] tracking-tight group-hover:text-[#FF5722] transition-colors leading-snug">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#111111] tracking-tight group-hover:text-[#FF5722] transition-colors leading-snug truncate">
               {project.title}
             </h3>
           </Link>
-          <p className="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2">
+          <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 h-[36px] overflow-hidden">
             {project.shortDescription}
           </p>
         </div>
 
         {/* Feature Pill Tags */}
-        <div className="flex flex-wrap gap-1.5 pt-1">
+        <div className="h-[52px] flex flex-wrap gap-1.5 align-content-start overflow-hidden shrink-0">
           {project.tags.slice(0, 4).map((tag) => (
             <span
               key={tag}
@@ -269,26 +271,26 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </span>
           )}
         </div>
-      </div>
 
-      {/* Card Footer Bar */}
-      <div className="pt-4 mt-4 border-t border-[#E5E7EB] flex items-center justify-between gap-3">
-        <Link
-          href={`/work/${project.slug}`}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#111111] group-hover:text-[#FF5722] transition-colors"
-        >
-          <span>View Case Study</span>
-          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-        </Link>
+        {/* Card Footer Bar */}
+        <div className="pt-3 border-t border-[#E5E7EB] flex items-center justify-between gap-3 shrink-0">
+          <Link
+            href={`/work/${project.slug}`}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#111111] group-hover:text-[#FF5722] transition-colors"
+          >
+            <span>View Case Study</span>
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
 
-        {/* Round Circular Coral Action Icon Button */}
-        <Link
-          href={`/work/${project.slug}`}
-          className="w-10 h-10 rounded-full bg-[#FFF3EE] text-[#FF5722] group-hover:bg-[#FF5722] group-hover:text-white flex items-center justify-center transition-all duration-200 shadow-2xs shrink-0"
-          title={`View ${project.title} case study`}
-        >
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+          {/* Round Circular Coral Action Icon Button */}
+          <Link
+            href={`/work/${project.slug}`}
+            className="w-10 h-10 rounded-full bg-[#FFF3EE] text-[#FF5722] group-hover:bg-[#FF5722] group-hover:text-white flex items-center justify-center transition-all duration-200 shadow-2xs shrink-0 cursor-pointer"
+            title={`View ${project.title} case study`}
+          >
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </div>
   );
