@@ -88,6 +88,27 @@ export function ProjectBuilder() {
         validateAndApplyCoupon(clean);
       }
     }
+
+    // Listener for Interactive Scope Builder selections
+    const handleScopeSelect = (e: Event) => {
+      const customEv = e as CustomEvent;
+      if (customEv.detail) {
+        const { projectType, title, description, features } = customEv.detail;
+        setFormData((prev) => ({
+          ...prev,
+          ...(projectType ? { projectType } : {}),
+          ...(description ? { description } : {}),
+        }));
+        if (Array.isArray(features) && features.length > 0) {
+          setSelectedFeatures(features);
+        }
+      }
+    };
+
+    window.addEventListener("selectProjectScope", handleScopeSelect);
+    return () => {
+      window.removeEventListener("selectProjectScope", handleScopeSelect);
+    };
   }, []);
 
   const validateAndApplyCoupon = async (codeToValidate?: string) => {

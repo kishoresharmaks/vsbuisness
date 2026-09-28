@@ -125,6 +125,50 @@ export function ProjectSelector() {
   };
 
   const handleBuildClick = () => {
+    // Map selector category ID to ProjectBuilder projectType
+    const typeMap: { [key: string]: { projectType: string; features: string[] } } = {
+      ecommerce: {
+        projectType: "E-commerce",
+        features: ["responsive", "seo", "speed", "payments", "cms"],
+      },
+      enterprise: {
+        projectType: "Custom Software",
+        features: ["responsive", "cms", "database", "security", "speed"],
+      },
+      "ai-platforms": {
+        projectType: "Web App",
+        features: ["responsive", "seo", "speed", "database", "security"],
+      },
+      websites: {
+        projectType: "Website",
+        features: ["responsive", "seo", "speed", "whatsapp"],
+      },
+      custom: {
+        projectType: "Custom Software",
+        features: ["responsive", "database", "security", "cms", "speed"],
+      },
+    };
+
+    const mapped = typeMap[activeCategory.id] || {
+      projectType: "Website",
+      features: ["responsive", "seo", "speed"],
+    };
+
+    // Dispatch custom event to ProjectBuilder
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("selectProjectScope", {
+          detail: {
+            projectType: mapped.projectType,
+            title: activeCategory.title,
+            description: `${activeCategory.title} — ${activeCategory.description}`,
+            features: mapped.features,
+          },
+        })
+      );
+    }
+
+    // Smooth scroll down to ProjectBuilder form
     const contactEl = document.getElementById("contact");
     if (contactEl) {
       contactEl.scrollIntoView({ behavior: "smooth" });
@@ -321,7 +365,7 @@ export function ProjectSelector() {
                   onClick={handleBuildClick}
                   className="w-full py-3.5 px-4 rounded-xl bg-[#2563EB] hover:bg-[#1d4ed8] text-white text-xs font-extrabold transition-all duration-200 shadow-md shadow-[#2563EB]/25 flex items-center justify-center gap-2 cursor-pointer active:scale-98"
                 >
-                  <span>Build this project →</span>
+                  <span>Build this project</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
