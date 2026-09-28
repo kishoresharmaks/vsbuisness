@@ -101,9 +101,12 @@ export default function RealAdminInquiriesPage() {
   // Admin Section Tab: 'inquiries' | 'offers' | 'analytics'
   const [adminTab, setAdminTab] = useState<"inquiries" | "offers" | "analytics">("inquiries");
 
-  // Analytics State
+  // Analytics State & Date/Day Filter
   const [analyticsData, setAnalyticsData] = useState<any>(null);
   const [loadingAnalytics, setLoadingAnalytics] = useState<boolean>(false);
+  const [analyticsTimeframe, setAnalyticsTimeframe] = useState<"all" | "today" | "yesterday" | "7days" | "30days" | "custom">("all");
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
 
   // Inquiries State
   const [inquiries, setInquiries] = useState<InquiryItem[]>([]);
@@ -143,7 +146,7 @@ export default function RealAdminInquiriesPage() {
       setIsAuthenticated(true);
       fetchInquiries();
       fetchOffers();
-      fetchAnalytics();
+      fetchAnalytics("all", "", "");
     }
   }, []);
 
@@ -155,16 +158,26 @@ export default function RealAdminInquiriesPage() {
       setPinError("");
       fetchInquiries();
       fetchOffers();
-      fetchAnalytics();
+      fetchAnalytics(analyticsTimeframe, startDate, endDate);
     } else {
       setPinError("Invalid Security PIN. Access denied.");
     }
   };
 
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = async (
+    tf: string = analyticsTimeframe,
+    sDate: string = startDate,
+    eDate: string = endDate
+  ) => {
     setLoadingAnalytics(true);
     try {
-      const res = await fetch("/api/admin/analytics");
+      const params = new URLSearchParams();
+      if (tf) params.set("timeframe", tf);
+      if (tf === "custom") {
+        if (sDate) params.set("startDate", sDate);
+        if (eDate) params.set("endDate", eDate);
+      }
+      const res = await fetch(`/api/admin/analytics?${params.toString()}`);
       const json = await res.json();
       if (json.success && json.data) {
         setAnalyticsData(json.data);
@@ -798,6 +811,109 @@ export default function RealAdminInquiriesPage() {
         {/* ================= SECTION 2: VISITOR & LOCATION ANALYTICS TAB ================= */}
         {adminTab === "analytics" && (
           <div className="space-y-8">
+            {/* Date / Day Filter Bar */}
+            <div className="bg-white border border-[#E5E7EB] rounded-3xl p-5 sm:p-6 shadow-2xs space-y-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-[#E5E7EB] pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-xl bg-[#2563EB]/10 text-[#2563EB]">
+                    <Calendar className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-[#111111]">Date &amp; Timeframe Analytics Filter</h3>
+                    <p className="text-xs text-[#5F6368]">Filter audience traffic &amp; telemetry logs by date ranges</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono font-bold text-[#5F6368] bg-[#F7F8FA] border border-[#E5E7EB] px-3 py-1 rounded-full">
+                    {analyticsTimeframe === "all" && "🗓️ All Time Logs"}
+                    {analyticsTimeframe === "today" && `📅 Today (${new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" })})`}
+                    {analyticsTimeframe === "yesterday" && "⏪ Yesterday"}
+                    {analyticsTimeframe === "7days" && "📊 Last 7 Days"}
+                    {analyticsTimeframe === "30days" && "📈 Last 30 Days"}
+                    {analyticsTimeframe === "custom" && "🗓️ Custom Date Range"}
+                  </span>
+                  
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => fetchAnalytics(analyticsTimeframe, startDate, endDate)}
+                    iconRight={<RefreshCw className={`w-3.5 h-3.5 ${loadingAnalytics ? "animate-spin" : ""}`} />}
+                  >
+                    Refresh
+                  </Button>
+                </div>
+              </div>
+
+              {/* Timeframe Preset Pills */}
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { id: "all", label: "🌐 All Time" },
+                  { id: "today", label: "📅 Today" },
+                  { id: "yesterday", label: "⏪ Yesterday" },
+                  { id: "7days", label: "📊 Last 7 Days" },
+                  { id: "30days", label: "📈 Last 30 Days" },
+                  { id: "custom", label: "🗓️ Custom Range" },
+                ].map((tf) => (
+                  <button
+                    key={tf.id}
+                    onClick={() => {
+                      const newTf = tf.id as any;
+                      setAnalyticsTimeframe(newTf);
+                      if (newTf !== "custom") {
+                        fetchAnalytics(newTf, startDate, endDate);
+                      }
+                    }}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      analyticsTimeframe === tf.id
+                        ? "bg-[#2563EB] text-white shadow-2xs"
+                        : "bg-[#F7F8FA] text-[#5F6368] border border-[#E5E7EB] hover:bg-white hover:text-[#111111]"
+                    }`}
+                  >
+                    {tf.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Custom Date Range Controls */}
+              {analyticsTimeframe === "custom" && (
+                <div className="pt-3 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-end gap-3 bg-[#F7F8FA] p-4 rounded-2xl border">
+                  <div className="w-full sm:w-auto flex-1">
+                    <label className="text-[11px] font-mono font-bold text-[#5F6368] block mb-1 uppercase">
+                      FROM DATE
+                    </label>
+                    <input
+                      type="date"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                      className="w-full p-2.5 text-xs rounded-xl border border-[#E5E7EB] bg-white focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                    />
+                  </div>
+
+                  <div className="w-full sm:w-auto flex-1">
+                    <label className="text-[11px] font-mono font-bold text-[#5F6368] block mb-1 uppercase">
+                      TO DATE
+                    </label>
+                    <input
+                      type="date"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                      className="w-full p-2.5 text-xs rounded-xl border border-[#E5E7EB] bg-white focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                    />
+                  </div>
+
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => fetchAnalytics("custom", startDate, endDate)}
+                    className="w-full sm:w-auto"
+                  >
+                    Apply Custom Filter →
+                  </Button>
+                </div>
+              )}
+            </div>
+
             {/* Top Stat Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-2xs">

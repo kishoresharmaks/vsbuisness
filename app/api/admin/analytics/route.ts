@@ -11,6 +11,45 @@ const INQUIRIES_FILE = path.join(DATA_DIR, "inquiries.json");
 
 export async function GET(req: NextRequest) {
   try {
+    const { searchParams } = new URL(req.url);
+    const timeframe = searchParams.get("timeframe") || "all";
+    const reqStartDate = searchParams.get("startDate");
+    const reqEndDate = searchParams.get("endDate");
+
+    // Determine date range boundaries
+    let filterStart: Date | null = null;
+    let filterEnd: Date | null = null;
+    const now = new Date();
+
+    if (timeframe === "today") {
+      filterStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+      filterEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+    } else if (timeframe === "yesterday") {
+      const yesterday = new Date(now);
+      yesterday.setDate(now.getDate() - 1);
+      filterStart = new Date(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate(), 0, 0, 0, 0);
+      filterEnd = new Date(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate(), 23, 59, 59, 999);
+    } else if (timeframe === "7days") {
+      filterStart = new Date();
+      filterStart.setDate(now.getDate() - 7);
+      filterStart.setHours(0, 0, 0, 0);
+      filterEnd = new Date();
+    } else if (timeframe === "30days") {
+      filterStart = new Date();
+      filterStart.setDate(now.getDate() - 30);
+      filterStart.setHours(0, 0, 0, 0);
+      filterEnd = new Date();
+    } else if (timeframe === "custom") {
+      if (reqStartDate) {
+        filterStart = new Date(reqStartDate);
+        filterStart.setHours(0, 0, 0, 0);
+      }
+      if (reqEndDate) {
+        filterEnd = new Date(reqEndDate);
+        filterEnd.setHours(23, 59, 59, 999);
+      }
+    }
+
     let logs: any[] = [];
     let inquiriesCount = 0;
 
@@ -18,8 +57,21 @@ export async function GET(req: NextRequest) {
     try {
       const conn = await connectToDatabase();
       if (conn) {
-        logs = await VisitorLogModel.find().sort({ timestamp: -1 }).lean();
-        inquiriesCount = await InquiryModel.countDocuments();
+        const mongoQuery: any = {};
+        if (filterStart || filterEnd) {
+          mongoQuery.timestamp = {};
+          if (filterStart) mongoQuery.timestamp.$gte = filterStart;
+          if (filterEnd) mongoQuery.timestamp.$lte = filterEnd;
+        }
+        logs = await VisitorLogModel.find(mongoQuery).sort({ timestamp: -1 }).lean();
+
+        const inqQuery: any = {};
+        if (filterStart || filterEnd) {
+          inqQuery.createdAt = {};
+          if (filterStart) inqQuery.createdAt.$gte = filterStart;
+          if (filterEnd) inqQuery.createdAt.$lte = filterEnd;
+        }
+        inquiriesCount = await InquiryModel.countDocuments(inqQuery);
       }
     } catch (dbErr) {
       console.error("DB Fetch Analytics Error:", dbErr);
@@ -29,7 +81,14 @@ export async function GET(req: NextRequest) {
     if (logs.length === 0 && fs.existsSync(LOGS_FILE)) {
       try {
         const fileContent = fs.readFileSync(LOGS_FILE, "utf-8");
-        logs = JSON.parse(fileContent);
+        const rawLogs: any[] = JSON.parse(fileContent);
+
+        logs = rawLogs.filter((l) => {
+          const logDate = new Date(l.timestamp);
+          if (filterStart && logDate < filterStart) return false;
+          if (filterEnd && logDate > filterEnd) return false;
+          return true;
+        });
       } catch (fsErr) {
         console.error("FS Read Logs Error:", fsErr);
       }
@@ -38,8 +97,13 @@ export async function GET(req: NextRequest) {
     if (inquiriesCount === 0 && fs.existsSync(INQUIRIES_FILE)) {
       try {
         const inqContent = fs.readFileSync(INQUIRIES_FILE, "utf-8");
-        const parsedInq = JSON.parse(inqContent);
-        inquiriesCount = parsedInq.length;
+        const parsedInq: any[] = JSON.parse(inqContent);
+        inquiriesCount = parsedInq.filter((i) => {
+          const inqDate = new Date(i.createdAt);
+          if (filterStart && inqDate < filterStart) return false;
+          if (filterEnd && inqDate > filterEnd) return false;
+          return true;
+        }).length;
       } catch {}
     }
 
@@ -114,6 +178,9 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
+      timeframe,
+      filterStart: filterStart ? filterStart.toISOString() : null,
+      filterEnd: filterEnd ? filterEnd.toISOString() : null,
       data: {
         totalVisitors,
         uniqueVisitors,
@@ -124,7 +191,7 @@ export async function GET(req: NextRequest) {
         regionStats,
         deviceStats,
         referrerStats,
-        recentLogs: logs.slice(0, 50),
+        recentLogs: logs.slice(0, 100),
       },
     });
   } catch (error: any) {
