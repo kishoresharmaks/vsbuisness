@@ -51,14 +51,14 @@ export function PortfolioGrid() {
       <SectionVectors />
       <Container size="default" className="px-3.5 sm:px-6 md:px-8">
         
-        {/* Header Section matching screenshot */}
+        {/* Header Section matching website brand theme */}
         <div className="flex flex-col gap-3 mb-8 sm:mb-10">
-          {/* Eyebrow with Coral Accent Line */}
+          {/* Eyebrow with Brand Blue Accent Line */}
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono font-bold tracking-[0.22em] text-[#FF5722] uppercase">
+            <span className="text-[11px] font-mono font-bold tracking-[0.22em] text-[#2563EB] uppercase">
               OUR WORK
             </span>
-            <span className="h-0.5 w-8 bg-[#FF5722] rounded-full inline-block" />
+            <span className="h-0.5 w-8 bg-[#2563EB] rounded-full inline-block" />
           </div>
 
           {/* Headline & Controls Bar */}
@@ -66,7 +66,7 @@ export function PortfolioGrid() {
             <div className="max-w-2xl">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111111] tracking-tight leading-tight">
                 Projects that make <br className="hidden sm:inline" />
-                businesses <span className="text-[#FF5722]">grow.</span>
+                businesses <span className="text-[#2563EB]">grow.</span>
               </h2>
               <p className="text-sm sm:text-base text-[#5F6368] mt-3 leading-relaxed">
                 Explore our featured projects, digital products and platforms built for real businesses.
@@ -91,8 +91,8 @@ export function PortfolioGrid() {
                       }}
                       className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer ${
                         isActive
-                          ? "bg-[#111111] text-white shadow-xs scale-102"
-                          : "bg-white text-[#5F6368] hover:text-[#111111] border border-[#E5E7EB] hover:border-[#111111]"
+                          ? "bg-[#2563EB] text-white shadow-xs scale-102"
+                          : "bg-white text-[#5F6368] hover:text-[#111111] border border-[#E5E7EB] hover:border-[#2563EB]"
                       }`}
                     >
                       {f.label}
@@ -106,7 +106,7 @@ export function PortfolioGrid() {
                 <button
                   type="button"
                   onClick={scrollLeft}
-                  className="w-10 h-10 rounded-full border border-[#E5E7EB] bg-white hover:bg-[#111111] hover:text-white text-slate-700 transition-all flex items-center justify-center shadow-2xs cursor-pointer"
+                  className="w-10 h-10 rounded-full border border-[#E5E7EB] bg-white hover:bg-[#2563EB] hover:text-white text-slate-700 transition-all flex items-center justify-center shadow-2xs cursor-pointer"
                   aria-label="Previous Project"
                 >
                   <ChevronLeft className="w-5 h-5" />
@@ -114,7 +114,7 @@ export function PortfolioGrid() {
                 <button
                   type="button"
                   onClick={scrollRight}
-                  className="w-10 h-10 rounded-full border border-[#E5E7EB] bg-white hover:bg-[#111111] hover:text-white text-slate-700 transition-all flex items-center justify-center shadow-2xs cursor-pointer"
+                  className="w-10 h-10 rounded-full border border-[#E5E7EB] bg-white hover:bg-[#2563EB] hover:text-white text-slate-700 transition-all flex items-center justify-center shadow-2xs cursor-pointer"
                   aria-label="Next Project"
                 >
                   <ChevronRight className="w-5 h-5" />
@@ -135,7 +135,7 @@ export function PortfolioGrid() {
           ))}
         </div>
 
-        {/* Bottom Pagination & Action Bar matching screenshot */}
+        {/* Bottom Pagination & Action Bar matching website blue theme */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-4">
           {/* Pagination Indicators (Dots) */}
           <div className="flex items-center justify-center gap-2">
@@ -144,7 +144,7 @@ export function PortfolioGrid() {
                 key={p.slug}
                 className={`transition-all duration-300 rounded-full ${
                   activeIndex === idx
-                    ? "w-6 h-2 bg-[#FF5722]"
+                    ? "w-6 h-2 bg-[#2563EB]"
                     : "w-2 h-2 bg-slate-300 hover:bg-slate-400"
                 }`}
               />

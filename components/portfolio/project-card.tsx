@@ -32,11 +32,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const getCategoryIcon = () => {
     switch (project.category) {
       case "E-Commerce":
-        return <ShoppingBag className="w-3.5 h-3.5 text-[#FF5722]" />;
+        return <ShoppingBag className="w-3.5 h-3.5 text-[#2563EB]" />;
       case "Enterprise Systems":
         return <Building2 className="w-3.5 h-3.5 text-[#2563EB]" />;
       case "AI & Web Platforms":
-        return <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6]" />;
+        return <Sparkles className="w-3.5 h-3.5 text-[#2563EB]" />;
       default:
         return <Globe className="w-3.5 h-3.5 text-[#2563EB]" />;
     }
@@ -46,15 +46,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const renderBrowserGraphic = () => {
     if (project.slug === "1handindia") {
       return (
-        <div className="w-full bg-gradient-to-br from-[#FFF5F2] via-white to-[#FEEAE3] rounded-xl p-4 sm:p-5 border border-[#FEE2E2] flex flex-col gap-3 min-h-[160px] justify-between">
+        <div className="w-full bg-gradient-to-br from-[#EFF6FF] via-white to-[#DBEAFE] rounded-xl p-4 sm:p-5 border border-[#BFDBFE] flex flex-col gap-3 min-h-[160px] justify-between">
           <div className="flex items-center justify-between gap-2">
             <span className="text-xs font-extrabold text-slate-800 font-mono tracking-tight">1HandIndia</span>
             <div className="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-full border border-slate-200 text-[10px] text-slate-500 shadow-2xs">
-              <Search className="w-3 h-3 text-[#FF5722]" />
+              <Search className="w-3 h-3 text-[#2563EB]" />
               <span>Search 10,000+ Products...</span>
             </div>
           </div>
-          <div className="bg-[#FF5722] text-white p-3.5 rounded-xl shadow-xs flex flex-col gap-1 text-left">
+          <div className="bg-[#2563EB] text-white p-3.5 rounded-xl shadow-xs flex flex-col gap-1 text-left">
             <span className="text-[10px] font-mono uppercase font-bold text-white/80">Multi-Vendor Marketplace</span>
             <span className="text-xs font-bold leading-tight">Everything you need, One Marketplace</span>
             <span className="text-[9px] bg-white/20 self-start px-2 py-0.5 rounded text-white font-mono font-medium mt-1">Shop Wholesale →</span>
@@ -204,7 +204,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Realistic Browser Window Frame Container */}
         <Link
           href={`/work/${project.slug}`}
-          className="w-full h-[175px] rounded-2xl bg-[#F8FAFC] border border-[#E5E7EB] p-3 flex flex-col justify-between relative overflow-hidden group-hover:border-[#FF5722]/40 transition-all duration-300 shrink-0"
+          className="w-full h-[175px] rounded-2xl bg-[#F8FAFC] border border-[#E5E7EB] p-3 flex flex-col justify-between relative overflow-hidden group-hover:border-[#2563EB]/40 transition-all duration-300 shrink-0"
         >
           {/* Simulated Browser Bar Header */}
           <div className="flex items-center justify-between pb-1.5 border-b border-[#E5E7EB] text-[11px] text-[#5F6368] shrink-0">
@@ -246,7 +246,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Project Title & Subtitle */}
         <div className="shrink-0 flex flex-col gap-1">
           <Link href={`/work/${project.slug}`}>
-            <h3 className="text-lg sm:text-xl font-extrabold text-[#111111] tracking-tight group-hover:text-[#FF5722] transition-colors leading-snug truncate">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#111111] tracking-tight group-hover:text-[#2563EB] transition-colors leading-snug truncate">
               {project.title}
             </h3>
           </Link>
@@ -256,17 +256,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Feature Pill Tags */}
-        <div className="h-[52px] flex flex-wrap gap-1.5 align-content-start overflow-hidden shrink-0">
+        <div className="h-[44px] flex flex-wrap items-start gap-1.5 overflow-hidden shrink-0">
           {project.tags.slice(0, 4).map((tag) => (
             <span
               key={tag}
-              className="text-[10px] font-mono font-medium px-2.5 py-1 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] text-slate-700"
+              className="inline-flex items-center px-2.5 py-1 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] text-[11px] font-mono font-semibold text-[#2563EB] whitespace-nowrap leading-none shadow-2xs"
             >
               {tag}
             </span>
           ))}
           {project.tags.length > 4 && (
-            <span className="text-[10px] font-mono font-semibold px-2 py-1 rounded-full bg-[#F8FAFC] text-slate-500">
+            <span className="inline-flex items-center px-2 py-1 rounded-lg bg-[#F8FAFC] border border-[#E5E7EB] text-[10px] font-mono font-bold text-slate-500 whitespace-nowrap leading-none">
               +{project.tags.length - 4}
             </span>
           )}
@@ -276,16 +276,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className="pt-3 border-t border-[#E5E7EB] flex items-center justify-between gap-3 shrink-0">
           <Link
             href={`/work/${project.slug}`}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#111111] group-hover:text-[#FF5722] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#111111] group-hover:text-[#2563EB] transition-colors"
           >
             <span>View Case Study</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
           </Link>
 
-          {/* Round Circular Coral Action Icon Button */}
+          {/* Round Circular Blue Action Icon Button */}
           <Link
             href={`/work/${project.slug}`}
-            className="w-10 h-10 rounded-full bg-[#FFF3EE] text-[#FF5722] group-hover:bg-[#FF5722] group-hover:text-white flex items-center justify-center transition-all duration-200 shadow-2xs shrink-0 cursor-pointer"
+            className="w-10 h-10 rounded-full bg-[#EFF6FF] text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white flex items-center justify-center transition-all duration-200 shadow-2xs shrink-0 cursor-pointer"
             title={`View ${project.title} case study`}
           >
             <ArrowRight className="w-4 h-4" />
