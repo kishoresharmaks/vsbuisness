@@ -290,13 +290,13 @@ jobs:
                         {step.number}
                       </div>
                       <div>
-                        <h3
-                          className={`text-base font-bold tracking-tight ${
+                        <span
+                          className={`block text-base font-bold tracking-tight ${
                             isActive ? "text-white" : "text-[#111111] group-hover:text-[#2563EB]"
                           }`}
                         >
                           {step.title}
-                        </h3>
+                        </span>
                         <p
                           className={`text-xs font-medium ${
                             isActive ? "text-gray-400" : "text-[#5F6368]"
@@ -350,9 +350,9 @@ jobs:
                             ACTIVE
                           </span>
                         </div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-[#111111] tracking-tight">
+                        <span className="block text-xl sm:text-2xl font-bold text-[#111111] tracking-tight">
                           {currentStep.title}: {currentStep.subtitle}
-                        </h3>
+                        </span>
                       </div>
                     </div>
 
@@ -399,10 +399,10 @@ jobs:
                       </p>
 
                       <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 sm:p-5">
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-[#111111] mb-3 flex items-center gap-2">
+                        <p className="text-xs font-bold uppercase tracking-wider text-[#111111] mb-3 flex items-center gap-2">
                           <Layers className="w-4 h-4 text-[#2563EB]" />
-                          Key Objectives & Milestones
-                        </h4>
+                          Key Objectives &amp; Milestones
+                        </p>
                         <ul className="space-y-2.5">
                           {currentStep.objectives.map((obj, i) => (
                             <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#111111] font-medium">
@@ -432,9 +432,9 @@ jobs:
                             <span className="text-[10px] font-mono font-extrabold text-[#2563EB] bg-[#2563EB]/10 px-2 py-0.5 rounded-full inline-block mb-2">
                               {item.badge}
                             </span>
-                            <h4 className="text-sm font-bold text-[#111111]">
+                            <span className="block text-sm font-bold text-[#111111]">
                               {item.name}
-                            </h4>
+                            </span>
                             <p className="text-xs text-[#5F6368] mt-1 leading-relaxed">
                               {item.desc}
                             </p>

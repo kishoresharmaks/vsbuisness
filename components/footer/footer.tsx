@@ -30,23 +30,23 @@ export function Footer() {
 
           {/* Navigation Column 1 */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#111111] mb-4">
+            <p className="text-xs font-mono font-bold uppercase tracking-wider text-[#111111] mb-4">
               Navigation
-            </h4>
+            </p>
             <ul className="flex flex-col gap-2.5 text-sm text-[#5F6368]">
               <li><a href="#services" className="hover:text-[#111111] transition-colors">Services</a></li>
               <li><a href="#work" className="hover:text-[#111111] transition-colors">Work</a></li>
               <li><a href="#process" className="hover:text-[#111111] transition-colors">Process</a></li>
               <li><a href="#about" className="hover:text-[#111111] transition-colors">About</a></li>
-              <li><a href="/start-project" className="hover:text-[#111111] transition-colors">Start a Project</a></li>
+              <li><a href="/start-project" className="hover:text-[#111111] transition-colors">Launch Project Scope</a></li>
             </ul>
           </div>
 
           {/* Services Column */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#111111] mb-4">
+            <p className="text-xs font-mono font-bold uppercase tracking-wider text-[#111111] mb-4">
               Services
-            </h4>
+            </p>
             <ul className="flex flex-col gap-2.5 text-sm text-[#5F6368]">
               <li><span className="hover:text-[#111111] transition-colors cursor-pointer">Websites</span></li>
               <li><span className="hover:text-[#111111] transition-colors cursor-pointer">Web Applications</span></li>
@@ -58,9 +58,9 @@ export function Footer() {
 
           {/* Contact & Communication */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#111111] mb-4">
+            <p className="text-xs font-mono font-bold uppercase tracking-wider text-[#111111] mb-4">
               Contact Us
-            </h4>
+            </p>
             <ul className="flex flex-col gap-3 text-sm text-[#5F6368]">
               <li>
                 <a href="mailto:vsgroupstn@gmail.com" className="hover:text-[#2563EB] transition-colors flex items-center gap-2">

@@ -515,9 +515,9 @@ export function ProjectBuilder() {
                       className="flex flex-col gap-6"
                     >
                       <div>
-                        <h3 className="text-xl font-bold text-[#111111] tracking-tight">
+                        <span className="block text-xl font-bold text-[#111111] tracking-tight">
                           1. WHAT DO YOU WANT TO BUILD?
-                        </h3>
+                        </span>
                         <p className="text-xs text-[#5F6368] mt-1">
                           Select a project category or click a preset to configure defaults instantly.
                         </p>
@@ -607,9 +607,9 @@ export function ProjectBuilder() {
                       className="flex flex-col gap-5"
                     >
                       <div>
-                        <h3 className="text-xl font-bold text-[#111111] tracking-tight">
+                        <span className="block text-xl font-bold text-[#111111] tracking-tight">
                           2. WHAT HELP DO YOU NEED?
-                        </h3>
+                        </span>
                         <p className="text-xs text-[#5F6368] mt-1">
                           Select the level of engineering and design expertise required for this project
                         </p>
@@ -668,9 +668,9 @@ export function ProjectBuilder() {
                       className="flex flex-col gap-6"
                     >
                       <div>
-                        <h3 className="text-xl font-bold text-[#111111] tracking-tight">
+                        <span className="block text-xl font-bold text-[#111111] tracking-tight">
                           3. FEATURES, INVESTMENT &amp; TIMELINE
-                        </h3>
+                        </span>
                         <p className="text-xs text-[#5F6368] mt-1">
                           Select key features, specify your budget investment level, and choose launch timeline
                         </p>
@@ -875,9 +875,9 @@ export function ProjectBuilder() {
                       className="flex flex-col gap-4"
                     >
                       <div>
-                        <h3 className="text-xl font-bold text-[#111111] tracking-tight">
+                        <span className="block text-xl font-bold text-[#111111] tracking-tight">
                           4. TELL US ABOUT YOUR PROJECT
-                        </h3>
+                        </span>
                         <p className="text-xs text-[#5F6368] mt-1">
                           Provide your contact details so our team can send you a detailed scope proposal
                         </p>
@@ -1015,9 +1015,9 @@ export function ProjectBuilder() {
                 <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3 mb-4">
                   <div className="flex items-center gap-2">
                     <FileText className="w-4 h-4 text-[#2563EB]" />
-                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#111111]">
+                    <p className="text-xs font-mono font-bold uppercase tracking-wider text-[#111111]">
                       LIVE SCOPE SUMMARY
-                    </h4>
+                    </p>
                   </div>
                   <span className="text-[10px] font-mono font-extrabold bg-[#2563EB]/10 text-[#2563EB] px-2 py-0.5 rounded-full">
                     STEP {step}/4
@@ -1091,9 +1091,9 @@ export function ProjectBuilder() {
                   <PhoneCall className="w-4 h-4" />
                   <span>PREFER DIRECT CONSULTATION?</span>
                 </div>
-                <h4 className="text-base font-bold text-white mb-1 leading-snug">
+                <p className="text-base font-bold text-white mb-1 leading-snug">
                   Speak directly with our technical lead
-                </h4>
+                </p>
                 <p className="text-xs text-slate-300 mb-5 leading-relaxed">
                   Need custom enterprise architecture or urgent execution? Reach out directly via call, WhatsApp, or email.
                 </p>

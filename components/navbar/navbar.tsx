@@ -153,7 +153,7 @@ export function Navbar() {
             >
               {/* Shimmer Sweep Overlay */}
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:animate-shimmer" />
-              <span>Start Project</span>
+              <span>Get Project Scope</span>
             </Button>
           </a>
         </div>

@@ -70,9 +70,9 @@ export function WhyUs() {
 
                 {/* Content */}
                 <div>
-                  <h3 className="text-base sm:text-xl font-bold text-[#111111] tracking-tight mb-2 group-hover:text-[#2563EB] transition-colors">
+                  <span className="block text-base sm:text-xl font-bold text-[#111111] tracking-tight mb-2 group-hover:text-[#2563EB] transition-colors">
                     {pillar.title}
-                  </h3>
+                  </span>
                   <p className="text-xs sm:text-sm text-[#5F6368] leading-relaxed">
                     {pillar.description}
                   </p>

@@ -44,13 +44,13 @@ export function ServicesList() {
                     <span className="text-[10px] sm:text-xs font-mono font-bold bg-[#F7F8FA] border border-[#E5E7EB] text-[#5F6368] px-2 py-0.5 rounded-full shrink-0">
                       {service.number}
                     </span>
-                    <h3
-                      className={`text-base sm:text-2xl md:text-3xl font-bold transition-colors duration-200 ${
+                    <span
+                      className={`block text-base sm:text-2xl md:text-3xl font-bold transition-colors duration-200 ${
                         isActive ? "text-[#2563EB]" : "text-[#111111]"
                       }`}
                     >
                       {service.title}
-                    </h3>
+                    </span>
                   </div>
 
                   {/* Summary & Toggle Arrow */}

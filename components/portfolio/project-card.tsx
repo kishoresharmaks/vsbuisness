@@ -246,9 +246,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Project Title & Subtitle */}
         <div className="shrink-0 flex flex-col gap-1">
           <Link href={`/work/${project.slug}`}>
-            <h3 className="text-lg sm:text-xl font-extrabold text-[#111111] tracking-tight group-hover:text-[#2563EB] transition-colors leading-snug truncate">
+            <span className="block text-lg sm:text-xl font-extrabold text-[#111111] tracking-tight group-hover:text-[#2563EB] transition-colors leading-snug truncate">
               {project.title}
-            </h3>
+            </span>
           </Link>
           <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 h-[36px] overflow-hidden">
             {project.shortDescription}
@@ -278,17 +278,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
             href={`/work/${project.slug}`}
             className="inline-flex items-center gap-1.5 text-xs font-bold text-[#111111] group-hover:text-[#2563EB] transition-colors"
           >
-            <span>View Case Study</span>
+            <span>Explore {project.title} Case Study</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
-
-          {/* Round Circular Blue Action Icon Button */}
-          <Link
-            href={`/work/${project.slug}`}
-            className="w-10 h-10 rounded-full bg-[#EFF6FF] text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white flex items-center justify-center transition-all duration-200 shadow-2xs shrink-0 cursor-pointer"
-            title={`View ${project.title} case study`}
-          >
-            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

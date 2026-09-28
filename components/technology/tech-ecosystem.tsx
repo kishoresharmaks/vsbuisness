@@ -494,9 +494,9 @@ export function TechEcosystem() {
 
               {/* Tech Title & Badges */}
               <div className="flex flex-col gap-0.5 sm:gap-1 min-w-0 grow w-full">
-                <h3 className="text-xs sm:text-base font-extrabold text-[#111111] tracking-tight group-hover:text-[#2563EB] transition-colors truncate">
+                <span className="block text-xs sm:text-base font-extrabold text-[#111111] tracking-tight group-hover:text-[#2563EB] transition-colors truncate">
                   {tech.name}
-                </h3>
+                </span>
 
                 <span className="text-[9px] sm:text-[10px] font-mono font-bold text-[#2563EB] bg-[#EFF6FF] border border-[#DBEAFE] px-1.5 sm:px-2 py-0.5 rounded-md self-start truncate max-w-full">
                   {tech.badge}

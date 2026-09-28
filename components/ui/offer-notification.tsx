@@ -201,9 +201,9 @@ export function OfferNotification() {
           </button>
         </div>
 
-        <h4 className="text-sm font-bold text-white tracking-tight mb-1">
+        <p className="text-sm font-bold text-white tracking-tight mb-1">
           {offer.title}
-        </h4>
+        </p>
         <p className="text-xs text-slate-300 mb-4 leading-relaxed">
           {offer.message}
         </p>

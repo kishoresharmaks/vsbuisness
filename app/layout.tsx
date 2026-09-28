@@ -16,16 +16,16 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "VS Business Solutions | Custom Web Development & Digital Product Studio",
   description:
-    "VS Business Solutions is a premier web development agency engineering ultra-fast websites, custom web applications, SaaS platforms, and e-commerce software for ambitious businesses.",
+    "VS Business Solutions engineers ultra-fast websites, custom web apps, SaaS platforms, and e-commerce software for ambitious businesses.",
   keywords: [
-    "Web Development Services",
+    "VS Business Solutions",
+    "Custom Web Development",
+    "Digital Product Studio",
+    "High Performance Websites",
     "Custom Web Applications",
     "Next.js Development Agency",
-    "High Performance Websites",
     "E-commerce Store Development",
-    "SaaS Product Engineering",
-    "VS Business Solutions",
-    "TypeScript Web Development",
+    "SaaS Platform Development",
     "SEO Optimized Websites",
   ],
   authors: [{ name: "VS Business Solutions" }],
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "VS Business Solutions | Custom Web Development & Digital Product Studio",
     description:
-      "Engineering ultra-fast websites, custom web applications, and scalable digital products designed for business growth.",
+      "VS Business Solutions engineers ultra-fast websites, custom web apps, SaaS platforms, and e-commerce software for ambitious businesses.",
     url: "https://buisness.beeshubfarmland.com",
     siteName: "VS Business Solutions",
     images: ["/Brand_Logo.png"],
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "VS Business Solutions | Premium Web Development Services",
+    title: "VS Business Solutions | Custom Web Development & Digital Product Studio",
     description:
-      "Ultra-fast Next.js websites, custom web apps, and digital product studio.",
+      "VS Business Solutions engineers ultra-fast websites, custom web apps, SaaS platforms, and e-commerce software for ambitious businesses.",
     images: ["/Brand_Logo.png"],
   },
   robots: {

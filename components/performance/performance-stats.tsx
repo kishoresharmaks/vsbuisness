@@ -43,9 +43,9 @@ export function PerformanceStats() {
               <span className="text-5xl md:text-6xl font-extrabold text-[#111111] tracking-tight">
                 {stat.value}
               </span>
-              <h3 className="text-base font-semibold text-[#111111]">
+              <span className="block text-base font-semibold text-[#111111]">
                 {stat.label}
-              </h3>
+              </span>
               <p className="text-xs text-[#5F6368] max-w-xs">
                 {stat.description}
               </p>
