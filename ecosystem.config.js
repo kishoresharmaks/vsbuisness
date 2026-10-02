@@ -43,7 +43,7 @@ module.exports = {
       name: "vs-business",
       // Direct Next.js binary ensures clean process signals and avoids extra npm wrapper
       script: "node_modules/next/dist/bin/next",
-      args: "start -p " + (loadedEnv.PORT || process.env.PORT || 3000),
+      args: "start -p " + (loadedEnv.PORT || process.env.PORT || 3005),
       cwd: __dirname,
       instances: 1,
       exec_mode: "fork",
@@ -53,12 +53,12 @@ module.exports = {
       // Default development environment
       env: {
         NODE_ENV: "development",
-        PORT: 3000,
+        PORT: 3005,
       },
       // Production environment activated via: pm2 start ecosystem.config.js --env production
       env_production: {
         NODE_ENV: "production",
-        PORT: loadedEnv.PORT || 3000,
+        PORT: loadedEnv.PORT || 3005,
         ...loadedEnv,
       },
     },
