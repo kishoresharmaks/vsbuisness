@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/lib/mongodb";
+import { connectToDatabase, getMongoDiagnostic } from "@/lib/mongodb";
 import InquiryModel from "@/models/Inquiry";
 import fs from "fs";
 import path from "path";
@@ -46,6 +46,7 @@ export async function GET() {
         success: true,
         count: dbInquiries.length,
         storageMode: "mongodb",
+        dbDiagnostic: getMongoDiagnostic(),
         data: dbInquiries,
       });
     }
@@ -58,6 +59,7 @@ export async function GET() {
       success: true,
       count: fileInquiries.length,
       storageMode: "json_file",
+      dbDiagnostic: getMongoDiagnostic(),
       data: fileInquiries,
     });
   } catch (error) {

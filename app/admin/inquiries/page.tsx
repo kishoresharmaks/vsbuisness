@@ -119,6 +119,7 @@ export default function RealAdminInquiriesPage() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [activeTab, setActiveTab] = useState<string>("All");
   const [storageMode, setStorageMode] = useState<string>("json_file");
+  const [dbDiagnostic, setDbDiagnostic] = useState<any>(null);
 
   // Offer State
   const [offers, setOffers] = useState<OfferConfig[]>([]);
@@ -207,6 +208,7 @@ export default function RealAdminInquiriesPage() {
       if (json.success && Array.isArray(json.data)) {
         setInquiries(json.data);
         if (json.storageMode) setStorageMode(json.storageMode);
+        if (json.dbDiagnostic) setDbDiagnostic(json.dbDiagnostic);
       }
     } catch (err) {
       console.error("Failed to fetch inquiries", err);
@@ -437,10 +439,20 @@ export default function RealAdminInquiriesPage() {
 
           <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
             {/* Storage Mode Badge */}
-            <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] text-xs font-mono">
-              <Database className="w-3.5 h-3.5 text-[#2563EB]" />
+            <div
+              className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono transition-all ${storageMode === "mongodb"
+                  ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                  : "bg-amber-50 border-amber-200 text-amber-900"
+                }`}
+              title={
+                storageMode === "mongodb"
+                  ? "Connected directly to MongoDB Atlas"
+                  : `MongoDB Not Connected: ${dbDiagnostic?.lastError || (!dbDiagnostic?.hasUri ? "MONGODB_URI missing in environment" : "Check credentials or Atlas IP whitelist")}`
+              }
+            >
+              <Database className={`w-3.5 h-3.5 ${storageMode === "mongodb" ? "text-emerald-600" : "text-amber-600"}`} />
               <span className="text-[#5F6368]">DB:</span>
-              <strong className="text-[#111111] font-bold">
+              <strong className="font-bold">
                 {storageMode === "mongodb" ? "MongoDB Atlas Connected" : "Local Disk JSON"}
               </strong>
             </div>
@@ -467,6 +479,21 @@ export default function RealAdminInquiriesPage() {
             </button>
           </div>
         </Container>
+
+        {/* MongoDB Diagnostic Alert Banner if not connected to MongoDB */}
+        {storageMode !== "mongodb" && dbDiagnostic && (
+          <div className="bg-amber-50/90 border-t border-b border-amber-200 px-4 py-2 text-xs text-amber-900 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-amber-700">⚠️ Database Notice:</span>
+              <span>
+                {dbDiagnostic.lastError || (!dbDiagnostic.hasUri ? "MONGODB_URI is not loaded or missing from your environment variables (.env)." : "MongoDB Atlas connection failed.")}
+              </span>
+            </div>
+            <div className="text-[11px] font-mono text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded border border-amber-200">
+              Safe Fallback Active: Leads saved to local JSON
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main Admin Section Switcher Tabs */}
